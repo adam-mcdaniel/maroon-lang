@@ -1,0 +1,1 @@
+/home/adam/Desktop/maroon/tools/target/debug/libtools.rlib: /home/adam/Desktop/maroon/tools/src/evaluator.rs /home/adam/Desktop/maroon/tools/src/io_tools.rs /home/adam/Desktop/maroon/tools/src/lib.rs /home/adam/Desktop/maroon/tools/src/logging.rs /home/adam/Desktop/maroon/tools/src/preprocessor.rs /home/adam/Desktop/maroon/tools/src/string_tools.rs

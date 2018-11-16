@@ -1,8 +1,8 @@
+use io_tools::*;
+use logging::*;
+use preprocessor::*;
 use std::process;
-use tools::io_tools::*;
-use tools::logging::*;
-use tools::preprocessor::*;
-use tools::string_tools::*;
+use string_tools::*;
 
 pub struct Evaluator {
     preserved_program: String,
@@ -96,12 +96,13 @@ impl Evaluator {
         for s in &self.data {
             if [
                 "!".to_string(),
-                "@eq".to_string(),
+                "@rec".to_string(),
                 "@eval".to_string(),
                 "@input".to_string(),
                 "@print".to_string(),
                 "@print*".to_string(),
                 "@print_pipe".to_string(),
+                "@print_pipe*".to_string(),
                 "@println".to_string(),
                 "@println*".to_string(),
             ]
@@ -148,6 +149,20 @@ impl Evaluator {
                     };
                     // println!("arg1: {}, arg2: {}, result: {}", arg1, arg2, result);
                     self.push(vec![result.to_string()]);
+                } else if n == "@rec".to_string() {
+                    let function = &self.safe_pop();
+                    let mut argument = self.safe_pop();
+                    loop {
+                        // info(format!(" function: {}", function));
+                        // info(format!(" argument: {}", argument));
+                        // break;
+                        // self.push_front(split(&call(function, argument)));
+                        let my_line = self.preserved_program.clone();
+                        argument =
+                            Evaluator::new(&format!("({}) ({}) !", function, argument), &my_line)
+                                .eval()
+                                .join("");
+                    }
                 } else if n == "@eval".to_string() {
                     let mut preprocessor = Preprocessor::new();
                     let arg = &self.safe_pop();
@@ -214,7 +229,23 @@ impl Evaluator {
                     let popped = self.safe_pop();
                     print!(
                         "{}",
+                        &popped
+                            .replace(" ", "")
+                            .replace("\\\\", "\\")
+                            .replace("\\x", "!")
+                            .replace("\\rp", ")")
+                            .replace("\\lp", "(")
+                            .replace("\\rb", "]")
+                            .replace("\\lb", "[")
+                            .replace("\\_", " ")
+                    );
+                    self.push(vec![popped]);
+                } else if n == "@print_pipe*".to_string() {
+                    let popped = self.safe_pop();
+                    print!(
+                        "{}",
                         &(unfold(&call(&popped, "_"))
+                            .replace(" ", "")
                             .replace("\\\\", "\\")
                             .replace("\\x", "!")
                             .replace("\\rp", ")")

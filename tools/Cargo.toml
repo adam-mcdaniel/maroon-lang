@@ -1,7 +1,6 @@
 [package]
-name = "maroon"
-version = "1.0.1"
+name = "tools"
+version = "0.1.0"
 authors = ["adam-mcdaniel <adam.mcdaniel17@gmail.com>"]
 
 [dependencies]
-tools = {path="tools"}

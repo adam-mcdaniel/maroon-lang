@@ -1,4 +1,11 @@
 [[package]]
 name = "maroon"
 version = "1.0.1"
+dependencies = [
+ "tools 0.1.0",
+]
+
+[[package]]
+name = "tools"
+version = "0.1.0"
 
