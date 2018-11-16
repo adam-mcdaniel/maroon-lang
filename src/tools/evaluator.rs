@@ -1,13 +1,13 @@
-use tools::logging::*;
-use tools::io_tools::*;
-use tools::string_tools::*;
-use tools::preprocessor::*;
 use std::process;
+use tools::io_tools::*;
+use tools::logging::*;
+use tools::preprocessor::*;
+use tools::string_tools::*;
 
 pub struct Evaluator {
     preserved_program: String,
     data: Vec<String>,
-    logging: bool
+    logging: bool,
 }
 
 impl Evaluator {
@@ -61,7 +61,6 @@ impl Evaluator {
     pub fn push(&mut self, n: Vec<String>) {
         // let mut data = n;
         if n.len() > 0 {
-
             // let data: Vec<String> = n
             //     .into_iter()
             //     .map(
@@ -95,14 +94,19 @@ impl Evaluator {
     pub fn end(&mut self) -> bool {
         let mut is_end = true;
         for s in &self.data {
-            if ["!".to_string(), 
+            if [
+                "!".to_string(),
                 "@eq".to_string(),
                 "@eval".to_string(),
                 "@input".to_string(),
                 "@print".to_string(),
                 "@print*".to_string(),
+                "@print_pipe".to_string(),
                 "@println".to_string(),
-                "@println*".to_string()].contains(s) {
+                "@println*".to_string(),
+            ]
+                .contains(s)
+            {
                 is_end = false;
             }
         }
@@ -114,17 +118,14 @@ impl Evaluator {
         match self.pop() {
             Some(n) => n,
             None => {
-                error(
-                    format!(
-                        "Attempted to call function with too few parameters: \n\n\"{}\"",
-                        self.preserved_program
-                        )
-                    );
+                error(format!(
+                    "Attempted to call function with too few parameters: \n\n\"{}\"",
+                    self.preserved_program
+                ));
                 process::exit(1);
             }
         }
     }
-
 
     pub fn step(&mut self) {
         let instruction = self.next();
@@ -134,46 +135,46 @@ impl Evaluator {
                 if n == "!".to_string() {
                     let argument = &self.safe_pop();
                     let function = &self.safe_pop();
-                    self.push_front(
-                        split(&call(
-                                function,
-                                argument
-                            ))
-                        );
+                    self.push_front(split(&call(function, argument)));
                 } else if n == "@input".to_string() {
                     self.push(vec![stdin()]);
-
                 } else if n == "@eq".to_string() {
                     let arg1 = &self.safe_pop();
                     let arg2 = &self.safe_pop();
 
                     let result = match arg1 == arg2 {
                         true => "a.b.a",
-                        false => "a.b.b"
+                        false => "a.b.b",
                     };
                     // println!("arg1: {}, arg2: {}, result: {}", arg1, arg2, result);
                     self.push(vec![result.to_string()]);
-
-
                 } else if n == "@eval".to_string() {
                     let mut preprocessor = Preprocessor::new();
                     let arg = &self.safe_pop();
-                    self.push(vec![Evaluator::new(&mut preprocessor.process(arg), arg).eval().join("")]);
-
+                    self.push(vec![
+                        Evaluator::new(&mut preprocessor.process(arg), arg)
+                            .eval()
+                            .join(""),
+                    ]);
                 } else if n == "@print".to_string() {
-                    print!("{}",
-                        &(self.safe_pop()
+                    print!(
+                        "{}",
+                        &(self
+                            .safe_pop()
                             .replace("\\\\", "\\")
                             .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
-                            .replace("\\_", " ")
-                        )
+                            .replace("\\_", " "))
                     );
                 } else if n == "@print*".to_string() {
-                    print!("{}", self.data.clone().join("")
+                    print!(
+                        "{}",
+                        self.data
+                            .clone()
+                            .join("")
                             .replace("\\\\", "\\")
                             .replace("\\x", "!")
                             .replace("\\rp", ")")
@@ -183,21 +184,24 @@ impl Evaluator {
                             .replace("\\_", " ")
                     );
                 } else if n == "@println".to_string() {
-                    println!("{}",
-                        &(
-                            self.safe_pop()
-                                .replace("\\\\", "\\")
-                                .replace("\\x", "!")
-                                .replace("\\rp", ")")
-                                .replace("\\lp", "(")
-                                .replace("\\rb", "]")
-                                .replace("\\lb", "[")
-                                .replace("\\_", " ")
-                        )
+                    println!(
+                        "{}",
+                        &(self
+                            .safe_pop()
+                            .replace("\\\\", "\\")
+                            .replace("\\x", "!")
+                            .replace("\\rp", ")")
+                            .replace("\\lp", "(")
+                            .replace("\\rb", "]")
+                            .replace("\\lb", "[")
+                            .replace("\\_", " "))
                     );
                 } else if n == "@println*".to_string() {
-                    println!("{}",
-                        self.data.clone().join("")
+                    println!(
+                        "{}",
+                        self.data
+                            .clone()
+                            .join("")
                             .replace("\\\\", "\\")
                             .replace("\\x", "!")
                             .replace("\\rp", ")")
@@ -206,20 +210,31 @@ impl Evaluator {
                             .replace("\\lb", "[")
                             .replace("\\_", " ")
                     );
-                    
+                } else if n == "@print_pipe".to_string() {
+                    let popped = self.safe_pop();
+                    print!(
+                        "{}",
+                        &(unfold(&call(&popped, "_"))
+                            .replace("\\\\", "\\")
+                            .replace("\\x", "!")
+                            .replace("\\rp", ")")
+                            .replace("\\lp", "(")
+                            .replace("\\rb", "]")
+                            .replace("\\lb", "[")
+                            .replace("\\_", " "))
+                    );
+                    self.push(vec![popped]);
                 } else {
                     self.push(split(&n));
                 }
             }
             None => {
-                process::exit(1);            
+                process::exit(1);
             }
         };
 
         if self.logging {
-            debug(format!(
-                "{:?}", self.data
-            ));
+            debug(format!("{:?}", self.data));
         }
     }
 
