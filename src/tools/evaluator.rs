@@ -119,7 +119,7 @@ impl Evaluator {
             Some(n) => n,
             None => {
                 error(format!(
-                    "Attempted to call function with too few parameters: \n\n\"{}\"",
+                    "Attempted to call function with too few parameters,\nor call a function using an improper amount of braces: \n\n\"{}\"",
                     self.preserved_program
                 ));
                 process::exit(1);

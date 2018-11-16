@@ -1,7 +1,1 @@
-// x = "Test" @println
-
-// "Printing x..."[_] @println*
-// PutStrln[x]
-
-
-
+PipeStrln[PipeStrln[PipeStrln[PipeStrln[PipeStrln[PipeStrln["Test"]]]]]]]]]]]]
