@@ -102,3 +102,18 @@ Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F]Plus_N[Plus_F][plus_x]] )
 // 1 is f.x.(f[x])
 1 = Succ[0]
 ```
+
+## Install Rust and Compile Maroon
+
+It's super easy.
+
+For \*nix
+
+```
+curl https://sh.rustup.rs -sSf | sh
+git clone https://github.com/adam-mcdaniel/maroon-lang
+cd maroon-lang
+cargo build --release
+```
+
+The path to the maroon executable is "target/release/maroon". It's statically linked, so you can move it where ever youd like without worrying about dependencies :)
