@@ -115,7 +115,7 @@ curl https://sh.rustup.rs -sSf | sh
 git clone https://github.com/adam-mcdaniel/maroon-lang
 cd maroon-lang
 cargo build --release
-./target/release/maroon
+./target/release/maroon examples/hello_world.m
 ```
 
 The path to the maroon executable is "target/release/maroon". It's statically linked, so you can move it where ever youd like without worrying about dependencies :)
