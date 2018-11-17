@@ -15,9 +15,27 @@ The equals sign binds the right side of the statement to the right, the parenthe
 
 ## Some weird quirks
 
+#### Stack
+
 maroon is a stack based language, and a weird one at that. There is no differentiation between data that's already been parsed and data that hasn't. Data that's been parsed is pushed to the back of the stack, and parsed data is popped off the front. When a function is called, it pops its argument off the back.
 
+#### Strings
+
 Strings in maroon are very, very weird. They are just functions that push tokens onto the stack to be printed off in succession. So `"Hello world\x"` becomes `none.(Hello \_ world\x)`. When that string is printed, the function is called and the stack is printed.
+
+Also some escape characters are required in strings.
+
+```
+\\ -> \
+\x -> !
+\lp -> (
+\rp -> )
+\lb -> [
+\rb -> ]
+\_ -> " " // this one is automatically inserted for spaces
+```
+
+#### Flags
 
 In addition, there are several flags used to interact with the interpreter, some are not useful in their current stage, though. Each of the useful flags has their own function to interface with it, so there is no real need for the users to touch them.
 
