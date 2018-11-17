@@ -1,67 +1,67 @@
-PutStrLn["AND Truth Table"]
-PutLn[
+PutStrln["AND Truth Table"]
+Putln[
     And[True][True]
 ]
-PutLn[
+Putln[
     And[True][False]
 ]
-PutLn[
+Putln[
     And[False][True]
 ]
-PutLn[
+Putln[
     And[False][False]
 ]
 
 
-PutStrLn["OR Truth Table"]
-PutLn[
+PutStrln["OR Truth Table"]
+Putln[
     Or[True][True]
 ]
-PutLn[
+Putln[
     Or[True][False]
 ]
-PutLn[
+Putln[
     Or[False][True]
 ]
-PutLn[
+Putln[
     Or[False][False]
 ]
 
 
-PutStrLn["NOT Truth Table"]
-PutLn[
+PutStrln["NOT Truth Table"]
+Putln[
     Not[True]
 ]
-PutLn[
+Putln[
     Not[False]
 ]
 
 
-PutStrLn["NAND Truth Table"]
-PutLn[
+PutStrln["NAND Truth Table"]
+Putln[
     Nand[True][True]
 ]
-PutLn[
+Putln[
     Nand[True][False]
 ]
-PutLn[
+Putln[
     Nand[False][True]
 ]
-PutLn[
+Putln[
     Nand[False][False]
 ]
 
 
-PutStrLn["XOR Truth Table"]
-PutLn[
+PutStrln["XOR Truth Table"]
+Putln[
     Xor[True][True]
 ]
-PutLn[
+Putln[
     Xor[True][False]
 ]
-PutLn[
+Putln[
     Xor[False][True]
 ]
-PutLn[
+Putln[
     Xor[False][False]
 ]

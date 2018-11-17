@@ -1,9 +1,9 @@
-PutStrLn["hello\x"]
+PutStrln["hello\x"]
 
 PutStr[">> "]
 RESPONSE = Input[_]
 
-PutStrLn[
+PutStrln[
 	If[Eq[RESPONSE]["hello\x"]]
 		[":\rp"]
 		[":\lp"]
