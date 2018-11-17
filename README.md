@@ -93,8 +93,12 @@ PutStr = PutStrA.(PutStrA[_] @print*)
 // PutStrln["test"] prints test\n to screen
 PutStrln = PutStrLnA.(PutStrLnA[_] @println*)
 
+// PipeFn[Function][Arg] calls Function with Arg just for its side-effects.
+// Returns Arg.
+PipeFn = Pipe_function.Pipe_x.(v.()[Pipe_function[Pipe_x]] Pipe_x)
+
 // Newln["test"] prints \n to screen and returns "test"
-Newln = NewlnA.(\\_ @println NewlnA))
+Newln = NewlnA.(\\_ @println NewlnA)
 // Pipe[test] prints test to screen and returns test
 Pipe = PipeA.(PipeA @print_pipe)
 // Pipeln[test] prints test\n to screen and returns test

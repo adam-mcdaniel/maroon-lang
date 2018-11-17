@@ -14,7 +14,6 @@ impl Preprocessor {
 
         // p.process("Print = (Print_A.(Print_A @print))");
         // p.process("Println = (Println_A.(Println_A @println))");
-
         p.process("True = (True_A.(True_B.(True_A)))");
         p.process("False = (False_A.(False_B.(False_B)))");
         p.process("And = (And_P.And_Q.(And_P [And_Q] [And_P]))");
@@ -38,12 +37,14 @@ impl Preprocessor {
         p.process("PutStr = PutStrA.(PutStrA[_] @print*)");
         p.process("PutStrln = PutStrLnA.(PutStrLnA[_] @println*)");
 
-        p.process("Newln = NewlnA.(\\_ @println NewlnA))");
+        p.process("Newln = NewlnA.(\\_ @println NewlnA)");
         p.process("Pipe = PipeA.(PipeA @print_pipe)");
         p.process("Pipeln = PipelnA.(PipelnA @print_pipe \\_ @println)");
         p.process("PipeStr = PipeStrA.(PipeStrA @print_pipe*)");
         p.process("PipeStrln = PipeStrlnA.(PipeStrlnA @print_pipe* \\_ @println)");
         p.process("Input = InputA.(ToStr[@input])");
+
+        p.process("PipeFn = Pipe_function.Pipe_x.(v.()[Pipe_function[Pipe_x]] Pipe_x)");
 
         p.process("Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)");
         p.process("Break = Break_A.(@break)");
