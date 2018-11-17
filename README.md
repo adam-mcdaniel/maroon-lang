@@ -6,7 +6,7 @@ There are some rules though.
 
 A function takes and returns exactly one argument. Here's an example.
 
-```
+```fs
 Fun = a.(a)
 PutStrln[a["Test"]]
 ```
@@ -25,13 +25,13 @@ Strings in maroon are very, very weird. They are just functions that push tokens
 
 Also some escape characters are required in strings.
 
-```
-\\ -> \
-\x -> !
-\lp -> (
-\rp -> )
-\lb -> [
-\rb -> ]
+```rust
+\\ -> "\"
+\x -> "!"
+\lp -> "("
+\rp -> ")"
+\lb -> "["
+\rb -> "]"
 \_ -> " " // this one is automatically inserted for spaces
 ```
 
@@ -45,7 +45,7 @@ The only supported mathmatical operations are Succ and Add :(
 
 ## Standard Library
 
-```
+```fs
 // takes two arguments returns first
 True = (True_A.(True_B.(True_A)))
 
@@ -127,7 +127,7 @@ It's super easy.
 
 For \*nix
 
-```
+```bash
 cd ~/Desktop
 curl https://sh.rustup.rs -sSf | sh
 git clone https://github.com/adam-mcdaniel/maroon-lang
