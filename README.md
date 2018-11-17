@@ -110,6 +110,7 @@ It's super easy.
 For \*nix
 
 ```
+cd ~/Desktop
 curl https://sh.rustup.rs -sSf | sh
 git clone https://github.com/adam-mcdaniel/maroon-lang
 cd maroon-lang
