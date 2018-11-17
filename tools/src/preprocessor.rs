@@ -37,6 +37,8 @@ impl Preprocessor {
         p.process("Putln = PutLnA.(PutLnA @println)");
         p.process("PutStr = PutStrA.(PutStrA[_] @print*)");
         p.process("PutStrln = PutStrLnA.(PutStrLnA[_] @println*)");
+
+        p.process("Newln = NewlnA.(\\_ @println NewlnA))");
         p.process("Pipe = PipeA.(PipeA @print_pipe)");
         p.process("Pipeln = PipelnA.(PipelnA @print_pipe \\_ @println)");
         p.process("PipeStr = PipeStrA.(PipeStrA @print_pipe*)");
@@ -44,8 +46,9 @@ impl Preprocessor {
         p.process("Input = InputA.(ToStr[@input])");
 
         p.process("Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)");
+        p.process("Break = Break_A.(@break)");
 
-        p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N[Succ_F][Succ_X] ] )");
+        p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][Succ_X&] ] )");
         p.process("Plus = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F][Plus_X]] )");
         p.process("Mult = Mult_M.Mult_N.Mult_F.Mult_X.( Mult_M[Mult_N[Mult_F]][Mult_X])");
         p.process("0 = False");

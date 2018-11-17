@@ -1,7 +1,9 @@
 use std::fs::File;
 use std::io;
 use std::io::*;
+use std::process;
 
+use logging::*;
 use string_tools::*;
 
 pub fn stdin() -> String {
@@ -61,7 +63,13 @@ pub fn read(file_name: &str) -> String {
 }
 
 pub fn readlines(file_name: &str) -> Vec<String> {
-    let file = BufReader::new(File::open(file_name).unwrap());
+    let file = match File::open(file_name) {
+        Ok(f) => BufReader::new(f),
+        Err(_) => {
+            error("Could not open file.");
+            process::exit(0);
+        }
+    };
     let lines: Vec<_> = file
         .lines()
         .map(|line| remove_comments(&line.unwrap()))

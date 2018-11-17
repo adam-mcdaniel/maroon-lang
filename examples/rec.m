@@ -1,7 +1,3 @@
-// Main = State.(Input[PipeStr[State]])
-
-// "begin" Main @rec
-
 
 Main = State.(
     USER.(
@@ -20,7 +16,7 @@ Main = State.(
                     ]
                     [
                         If[Eq[State]["Youre almost there"]]
-                            ["Youre almost there"]
+                            [Break[_]]
                             ["Run"]
                     ]
             ]

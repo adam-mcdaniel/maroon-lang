@@ -16,7 +16,7 @@ impl Evaluator {
             preserved_program: actual_line.to_string(),
             data: split(program),
             logging: false,
-            // logging: true
+            // logging: true,
         }
     }
 
@@ -162,6 +162,9 @@ impl Evaluator {
                             Evaluator::new(&format!("({}) ({}) !", function, argument), &my_line)
                                 .eval()
                                 .join("");
+                        if argument == "@break".to_string() {
+                            break;
+                        }
                     }
                 } else if n == "@eval".to_string() {
                     let mut preprocessor = Preprocessor::new();
@@ -255,6 +258,7 @@ impl Evaluator {
                             .replace("\\_", " "))
                     );
                     self.push(vec![popped]);
+                // } else if n == "@break".to_string() {
                 } else {
                     self.push(split(&n));
                 }
