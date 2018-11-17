@@ -94,9 +94,9 @@ Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)
 Break = Break_A.(@break)
 
 // Succ[n] returns Add[n][1]
-Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][succ_x&] ] )
+Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][Succ_X&] ] )
 // Add[m][n] returns m+n
-Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F]Plus_N[Plus_F][plus_x]] )
+Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F]Plus_N[Plus_F][Plus_X]] )
 // 0 is False
 0 = False
 // 1 is f.x.(f[x])
