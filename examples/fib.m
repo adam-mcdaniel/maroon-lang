@@ -25,4 +25,5 @@ fib = n.(Head[n[
     ][Pair[1][0]]]
 )
 
+
 fib[10]
