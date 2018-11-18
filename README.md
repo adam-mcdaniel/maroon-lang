@@ -115,6 +115,9 @@ Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)
 // Break["test"] breaks out of a Rec loop
 Break = Break_A.(@break)
 
+// Pred[n] returns n-1
+Pred = Pred_N.(Pred_N @pred)
+
 // Succ[n] returns Add[n][1]
 Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][Succ_X&] ] )
 // Add[m][n] returns m+n
