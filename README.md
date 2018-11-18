@@ -104,7 +104,7 @@ Pipe = PipeA.(PipeA @print_pipe)
 // Pipeln[test] prints test\n to screen and returns test
 Pipeln = PipelnA.(PipelnA @print_pipe \\_ @println)
 // PipeStr["test"] prints test to screen and returns test
-PipeStr = PipeStrA.(PipeStrA @print*pipe*)
+PipeStr = PipeStrA.(PipeStrA @print_pipe*)
 // PipeStrln["test"] prints test\n to screen and returns test
 PipeStrln = PipeStrlnA.(PipeStrlnA @print_pipe* \\* @println)
 // Input["test"] returns user input
