@@ -139,6 +139,30 @@ impl Evaluator {
                     self.push_front(split(&call(function, argument)));
                 } else if n == "@input".to_string() {
                     self.push(vec![stdin()]);
+                } else if n == "@pred".to_string() {
+                    let function = &self.safe_pop();
+
+                    let my_line = self.preserved_program.clone();
+                    let num = Evaluator::new(&format!("ToInt_N.(ToInt_N |.|.| ! | ! | !) ({}) !", function), &my_line)
+                        .eval()
+                        .join("")
+                        .replace(".", "")
+                        .matches("|")
+                        .count() - 1;
+                    
+                    // self.push(vec!["Succ ".repeat(num) + "0" + &" ! ".repeat(num)]);
+                    let mut preprocessor = Preprocessor::new();
+
+                    let data = 
+                        Evaluator::new(&preprocessor.process(&(" Succ ".repeat(num)
+                            + " 0 " + &" ! ".repeat(num))), &my_line)
+                            .eval();
+                    // println!("pred: {:?}", data);
+                    self.push(
+                        data
+                        );
+
+
                 } else if n == "@eq".to_string() {
                     let arg1 = &self.safe_pop();
                     let arg2 = &self.safe_pop();
