@@ -43,7 +43,6 @@ pub fn call(function: &str, arg: &str) -> String {
     let mut n: i32 = 0;
 
     let mut first_mutable = false;
-    let mut second_mutable = false;
     loop {
 
         // if the index of the current character in the string is greater
@@ -80,18 +79,6 @@ pub fn call(function: &str, arg: &str) -> String {
                     result = insert(&result, &arg, (n as usize)-token.len()-1);
                     n += ((arg.len()-1) as i32 - (token.len() as i32))+ 1;
                 }
-                // else if token == parameter_name.to_string() + "$" && !second_mutable {
-                //     second_mutable = true;
-                //     result = remove(&result, n as usize - 2 as usize);
-                //     n -= 1;
-                //     token = token[..token.len()-1].to_string();
-
-                //     for _ in 0..(token.len()) {
-                //         result = remove(&result, (n as usize)-token.len()-1);
-                //     }
-                //     result = insert(&result, &arg, (n as usize)-token.len()-1);
-                //     n += ((arg.len()-1) as i32 - (token.len() as i32))+ 1;
-                // }
                 
 
                 token = "".to_string();
