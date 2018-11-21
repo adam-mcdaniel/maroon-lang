@@ -17,7 +17,7 @@ The equals sign binds the right side of the statement to the right, the parenthe
 
 #### Stack
 
-maroon is a stack based language, and a weird one at that. There is no differentiation between data that's already been parsed and data that hasn't. Data that's been parsed is pushed to the back of the stack, and parsed data is popped off the front. When a function is called, it pops its argument off the back.
+maroon is a stack based language, and a weird one at that. There is no differentiation between data that's already been parsed and data that hasn't. Data that's been parsed is pushed to the back of the stack, and data to be parsed is popped off the front. When a function is called, it pops its argument off the back.
 
 #### Strings
 
