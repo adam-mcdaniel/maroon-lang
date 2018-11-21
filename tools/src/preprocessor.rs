@@ -12,8 +12,6 @@ impl Preprocessor {
             context: HashMap::new(),
         };
 
-        // p.process("Print = (Print_A.(Print_A @print))");
-        // p.process("Println = (Println_A.(Println_A @println))");
         p.process("True = (True_A.(True_B.(True_A)))");
         p.process("False = (False_A.(False_B.(False_B)))");
         p.process("And = (And_P.And_Q.(And_P [And_Q] [And_P]))");
@@ -119,8 +117,6 @@ impl Preprocessor {
 
             expressions.append(&mut vec![trimmed_line.to_string()]);
         }
-
-        // println!("{:?}", expressions);
         return expressions;
     }
 
@@ -130,9 +126,6 @@ impl Preprocessor {
 
     #[allow(dead_code)]
     pub fn replace_strings(&mut self, line: &str) -> String {
-        // line
-        //     .replace("[", " ")
-        //     .replace("]", " !")
         let mut result: String = "".to_string();
 
         let mut quote_count = 0;
@@ -162,16 +155,13 @@ impl Preprocessor {
                 }
             }
         }
-        // println!("string: {}", line);
         return result;
     }
 
+    // maps left of = to right of =
     pub fn bind(&mut self, line: &str) -> String {
         if line.contains('=') {
-            // println!("{:?}", self.context);
             let line_vec = split(line);
-            // let value = Evaluator::new(&self.process(&line_vec[line_vec.len()-1].clone())).eval().join("");
-            // let value = Evaluator::new(&self.process(&line_vec[2..].join(" ").clone())).eval().join("");
             let value = "(".to_owned()
                 + &Evaluator::new(
                     &self.process(&line[find(&line, "=") + 1..]),
@@ -180,22 +170,9 @@ impl Preprocessor {
                 .join(" ")
                 + ")";
             self.context.insert(line_vec[0].clone(), value.to_string());
-            // println!("{:?}", self.context);
 
             return "".to_string();
         } else {
-            // let mut line_vec = split(line);
-
-            // line_vec = line_vec
-            //     .iter()
-            //     .map(move |x|
-            //     {
-            //         println!("\tTOKEN: {}", x);
-            //         match self.context.get(x) {
-            //             Some(n) => n.to_string(),
-            //             None => x.to_string()
-            //         }
-            //     }).collect();
             let mut replaced_line: String = line.to_string();
             let mut replacement: &str;
 
