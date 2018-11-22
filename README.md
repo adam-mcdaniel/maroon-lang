@@ -1,4 +1,5 @@
 # maroon-lang
+![Maroon](logo.png)
 
 maroon is my attempt at a functional programming language. I wanted to become more familiar with the Lambda Calculus, so I made this! It's very simple to use.
 
