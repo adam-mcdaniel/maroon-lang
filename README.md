@@ -11,7 +11,7 @@ Fun = a.(a)
 PutStrln[Fun["Test"]]
 ```
 
-The equals sign binds the right side of the statement to the right, the parentheses group the function body, the square brackets call a function with arguments.
+The equals sign binds the left side of the statement to the right, the parentheses group the function body, the square brackets call a function with arguments.
 
 ## Some weird quirks
 
