@@ -8,7 +8,7 @@ A function takes and returns exactly one argument. Here's an example.
 
 ```fs
 Fun = a.(a)
-PutStrln[a["Test"]]
+PutStrln[Fun["Test"]]
 ```
 
 The equals sign binds the right side of the statement to the right, the parentheses group the function body, the square brackets call a function with arguments.
