@@ -54,33 +54,33 @@ False = (False_A.(False_B.(False_B)))
 
 
 // logical and[a][b]
-And = (And_P.And_Q.(And_P [And_Q][and_p]))
+And = (And_P.And_Q.(And_P [And_Q][And_P]))
 // logical or[a][b]
-Or = (Or_P.Or_Q.(Or_P [Or_P][or_q]))
+Or = (Or_P.Or_Q.(Or_P [Or_P][Or_Q]))
 // logical not[a][b]
 Not = (Not_P.(Not_P[False][True]))
 // logical nand[a][b]
-Nand = Nand_A.Nand_B.(Not[And[Nand_A][nand_b]])
+Nand = Nand_A.Nand_B.(Not[And[Nand_A][Nand_B]])
 
 // if[condition][then_case][else_case]
-If = If_P.(If_A.(If_B.(If_P[If_A][if_b])))
+If = If_P.(If_A.(If_B.(If_P[If_A][If_B])))
 
 // Eq[a][b] returns a=b?
 Eq = Eq_A.Eq_B.(Eq_A Eq_B @eq)
 Eq = Eq_A.Eq_B.(If [Eq[Eq_A][Eq_B]][True][False])
 // NotEq[a][b] returns a=/=b?
-NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A][noteq_b]])
+NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A][NotEq_B]])
 // logical xor[a][b]
-Xor = Xor_A.(Xor_B.(And[Or[Xor_A][xor_b]][Not[Eq[Xor_A][xor_b]]]))
+Xor = Xor_A.(Xor_B.(And[Or[Xor_A][xor_b]][Not[Eq[Xor_A][Xor_B]]]))
 
 // Pair[a][b] is a linked list
-Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z&[Pair_X][pair_y]))
+Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z&[Pair_X][Pair_Y]))
 // Head[Pair[a][b]] returns a
 Head = First_P.(First_P[True])
 // Tail[Pair[a][b]] returns b
 Tail = Second_P.(Second_P[False])
 // Index[Pair[a][b]][0] returns a
-Index = Index_P.Index_N.(Head[Index_N[Tail][index_p]])
+Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])
 
 // ToStr[test] returns "test"
 ToStr = ToStrA.( none.(ToStrA) )
@@ -106,7 +106,7 @@ Pipeln = PipelnA.(PipelnA @print_pipe \\_ @println)
 // PipeStr["test"] prints test to screen and returns test
 PipeStr = PipeStrA.(PipeStrA @print_pipe*)
 // PipeStrln["test"] prints test\n to screen and returns test
-PipeStrln = PipeStrlnA.(PipeStrlnA @print_pipe* \\* @println)
+PipeStrln = PipeStrlnA.(PipeStrlnA @print_pipe* \\_ @println)
 // Input["test"] returns user input
 Input = InputA.(ToStr[@input])
 
