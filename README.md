@@ -58,7 +58,7 @@ And = (And_P.And_Q.(And_P [And_Q][and_p]))
 // logical or[a][b]
 Or = (Or_P.Or_Q.(Or_P [Or_P][or_q]))
 // logical not[a][b]
-Not = (Not_P.(Not_P[False][true]))
+Not = (Not_P.(Not_P[False][True]))
 // logical nand[a][b]
 Nand = Nand_A.Nand_B.(Not[And[Nand_A][nand_b]])
 
@@ -67,7 +67,7 @@ If = If_P.(If_A.(If_B.(If_P[If_A][if_b])))
 
 // Eq[a][b] returns a=b?
 Eq = Eq_A.Eq_B.(Eq_A Eq_B @eq)
-Eq = Eq_A.Eq_B.(If [Eq[Eq_A][Eq_B]][true][False])
+Eq = Eq_A.Eq_B.(If [Eq[Eq_A][Eq_B]][True][False])
 // NotEq[a][b] returns a=/=b?
 NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A][noteq_b]])
 // logical xor[a][b]
