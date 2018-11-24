@@ -41,7 +41,7 @@ In addition, there are several flags used to interact with the interpreter, some
 
 #### Only addition :(
 
-The only supported mathmatical operations are Succ and Add :(
+The only supported mathmatical operations are Succ, Add, and Pred :(
 
 ## Standard Library
 
