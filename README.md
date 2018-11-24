@@ -39,7 +39,7 @@ Also some escape characters are required in strings.
 
 In addition, there are several flags used to interact with the interpreter, some are not useful in their current stage, though. Each of the useful flags has their own function to interface with it, so there is no real need for the users to touch them.
 
-#### Only addition :(
+#### Math
 
 The only supported mathmatical operations are Succ, Add, and Pred :(
 
