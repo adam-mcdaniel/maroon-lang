@@ -32,8 +32,8 @@ impl Preprocessor {
         p.process("ToStr = ToStrA.( none.(ToStrA) )");
         p.process("Put = PutA.(PutA @print)");
         p.process("Putln = PutLnA.(PutLnA @println)");
-        p.process("PutStr = PutStrA.(PutStrA[_] @print*)");
-        p.process("PutStrln = PutStrLnA.(PutStrLnA[_] @println*)");
+        p.process("PutStr = PutStrA.(PutStrA[none] @print*)");
+        p.process("PutStrln = PutStrLnA.(PutStrLnA[none] @println*)");
 
         p.process("Newln = NewlnA.(\\_ @println NewlnA)");
         p.process("Pipe = PipeA.(PipeA @print_pipe)");
