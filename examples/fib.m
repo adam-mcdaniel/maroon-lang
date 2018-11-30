@@ -27,22 +27,3 @@ fib = n.(Head[n[
 
 
 fib[10]
-
-a = True
-PipeStrln[
-    If[a]["hello world"]["ew"]
-]
-True = a.b.a
-False = a.b.b
-
-If = a.b.c.(
-    a[b][c]
-)
-
-Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z&[Pair_X][Pair_Y]))
-
-// a = True
-// if a:
-//     print("hello world")
-// else:
-//     print("ew")
