@@ -203,13 +203,13 @@ impl Evaluator {
                         "{}",
                         &(self
                             .safe_pop()
-                            .replace("\\\\", "\\")
-                            .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
+                            .replace("\\x", "!")
                             .replace("\\_", " ")
+                            .replace("\\\\", "\\\\.")
                             .replace("\\.", ""))
                     );
                 } else if n == "@print*".to_string() {
@@ -218,13 +218,13 @@ impl Evaluator {
                         self.data
                             .clone()
                             .join("")
-                            .replace("\\\\", "\\")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
                             .replace("\\x", "!")
                             .replace("\\_", " ")
+                            .replace("\\\\", "\\\\.")
                             .replace("\\.", "")
                     );
                 } else if n == "@println".to_string() {
@@ -232,14 +232,14 @@ impl Evaluator {
                         "{}",
                         &(self
                             .safe_pop()
-                            .replace("\\\\", "\\")
-                            .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
-                            .replace("\\.", "")
-                            .replace("\\_", " "))
+                            .replace("\\x", "!")
+                            .replace("\\_", " ")
+                            .replace("\\\\", "\\\\.")
+                            .replace("\\.", ""))
                     );
                 } else if n == "@println*".to_string() {
                     println!(
@@ -247,13 +247,13 @@ impl Evaluator {
                         self.data
                             .clone()
                             .join("")
-                            .replace("\\\\", "\\")
-                            .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
+                            .replace("\\x", "!")
                             .replace("\\_", " ")
+                            .replace("\\\\", "\\\\.")
                             .replace("\\.", "")
                     );
                 } else if n == "@print_pipe".to_string() {
@@ -262,13 +262,13 @@ impl Evaluator {
                         "{}",
                         &popped
                             .replace(" ", "")
-                            .replace("\\\\", "\\")
-                            .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
+                            .replace("\\x", "!")
                             .replace("\\_", " ")
+                            .replace("\\\\", "\\\\.")
                             .replace("\\.", "")
                     );
                     self.push(vec![popped]);
@@ -278,13 +278,13 @@ impl Evaluator {
                         "{}",
                         &(unfold(&call(&popped, "_"))
                             .replace(" ", "")
-                            .replace("\\\\", "\\")
-                            .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
+                            .replace("\\x", "!")
                             .replace("\\_", " ")
+                            .replace("\\\\", "\\\\.")
                             .replace("\\.", ""))
                     );
                     self.push(vec![popped]);
