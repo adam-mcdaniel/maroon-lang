@@ -132,11 +132,11 @@ impl Preprocessor {
             match c {
                 '"' => {
                     if quote_count == 1 {
-                        result += ")";
+                        result += "\\.)";
                         // close quote
                         quote_count = 0;
                     } else {
-                        result += "none.(";
+                        result += "none.(\\.";
                         quote_count += 1;
                     }
                 }
