@@ -143,7 +143,7 @@ impl Preprocessor {
 
                 ' ' => {
                     if quote_count == 1 {
-                        result += " \\_ ";
+                        result += "\\. \\_ \\.";
                     } else {
                         result += " ";
                     }

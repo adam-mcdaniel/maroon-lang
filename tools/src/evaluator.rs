@@ -209,7 +209,8 @@ impl Evaluator {
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
-                            .replace("\\_", " "))
+                            .replace("\\_", " ")
+                            .replace("\\.", ""))
                     );
                 } else if n == "@print*".to_string() {
                     print!(
@@ -218,12 +219,13 @@ impl Evaluator {
                             .clone()
                             .join("")
                             .replace("\\\\", "\\")
-                            .replace("\\x", "!")
                             .replace("\\rp", ")")
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
+                            .replace("\\x", "!")
                             .replace("\\_", " ")
+                            .replace("\\.", "")
                     );
                 } else if n == "@println".to_string() {
                     println!(
@@ -236,6 +238,7 @@ impl Evaluator {
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
+                            .replace("\\.", "")
                             .replace("\\_", " "))
                     );
                 } else if n == "@println*".to_string() {
@@ -251,6 +254,7 @@ impl Evaluator {
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
                             .replace("\\_", " ")
+                            .replace("\\.", "")
                     );
                 } else if n == "@print_pipe".to_string() {
                     let popped = self.safe_pop();
@@ -265,6 +269,7 @@ impl Evaluator {
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
                             .replace("\\_", " ")
+                            .replace("\\.", "")
                     );
                     self.push(vec![popped]);
                 } else if n == "@print_pipe*".to_string() {
@@ -279,7 +284,8 @@ impl Evaluator {
                             .replace("\\lp", "(")
                             .replace("\\rb", "]")
                             .replace("\\lb", "[")
-                            .replace("\\_", " "))
+                            .replace("\\_", " ")
+                            .replace("\\.", ""))
                     );
                     self.push(vec![popped]);
                 // } else if n == "@break".to_string() {

@@ -22,6 +22,5 @@ fn main() {
     for line in Preprocessor::get_expressions(readlines(&args[1])) {
         Evaluator::new(&preprocessor.process(&line), &line).eval();
     }
-
     // TODO: Add import function / keyword
 }
