@@ -3,4 +3,4 @@
 
 test = "hmm"
 x = 3[PipeStrln]["test"]
-PutStrln["x test\\\\\x."]
+PutStrln["let bounded \e self.bind(calls_checked)"]

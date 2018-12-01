@@ -28,6 +28,8 @@ Also some escape characters are required in strings.
 ```rust
 \\ -> "\"
 \x -> "!"
+\e -> "="
+\. -> ""
 \lp -> "("
 \rp -> ")"
 \lb -> "["

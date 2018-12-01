@@ -149,6 +149,14 @@ impl Preprocessor {
                     }
                 }
 
+                '=' => {
+                    if quote_count == 1 {
+                        result += "\\.\\e\\.";
+                    } else {
+                        result += "=";
+                    }
+                }
+
                 some_char => {
                     result += &some_char.to_string();
                 }
