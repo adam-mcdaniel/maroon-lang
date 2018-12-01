@@ -1,10 +1,10 @@
-PutStrln["hello\x"]
+PutStrln["hello!"]
 
 PutStr[">> "]
 RESPONSE = Input[_]
 
 PutStrln[
-	If[Eq[RESPONSE]["hello\x"]]
-		[":\rp"]
-		[":\lp"]
+	If[Eq[RESPONSE]["hello!"]]
+		[":)"]
+		[":("]
 ]

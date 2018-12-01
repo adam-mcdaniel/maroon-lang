@@ -191,6 +191,13 @@ impl Preprocessor {
                         result += "]";
                     }
                 }
+                '\\' => {
+                    if quote_count == 1 {
+                        result += "\\.\\\\\\.";
+                    } else {
+                        result += "\\";
+                    }
+                }
 
                 some_char => {
                     result += &some_char.to_string();

@@ -1,2 +1,2 @@
-PutStrln["Hello world\x"]
+PutStrln["Hello world!"]
 PutStrln["none"]
