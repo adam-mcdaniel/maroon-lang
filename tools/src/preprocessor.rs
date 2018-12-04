@@ -149,6 +149,56 @@ impl Preprocessor {
                     }
                 }
 
+                '=' => {
+                    if quote_count == 1 {
+                        result += "\\.\\e\\.";
+                    } else {
+                        result += "=";
+                    }
+                }
+                '!' => {
+                    if quote_count == 1 {
+                        result += "\\.\\x\\.";
+                    } else {
+                        result += "!";
+                    }
+                }
+                '(' => {
+                    if quote_count == 1 {
+                        result += "\\.\\lp\\.";
+                    } else {
+                        result += "(";
+                    }
+                }
+                ')' => {
+                    if quote_count == 1 {
+                        result += "\\.\\rp\\.";
+                    } else {
+                        result += ")";
+                    }
+                }
+                '[' => {
+                    if quote_count == 1 {
+                        result += "\\.\\lb\\.";
+                    } else {
+                        result += "[";
+                    }
+                }
+                ']' => {
+                    if quote_count == 1 {
+                        result += "\\.\\rb\\.";
+                    } else {
+                        result += "]";
+                    }
+                }
+                '\\' => {
+                    if quote_count == 1 {
+                        result += "\\.\\\\\\.";
+                    } else {
+                        result += "\\";
+                    }
+                }
+
                 some_char => {
                     result += &some_char.to_string();
                 }

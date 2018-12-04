@@ -25,24 +25,28 @@ pub fn stdin() -> String {
                 result += " \\_ ";
             }
 
-            '\\' => {
-                result += "\\\\";
-            }
-            '(' => {
-                result += "\\lp";
-            }
-            ')' => {
-                result += "\\rp";
-            }
-            '[' => {
-                result += "\\lb";
-            }
-            ']' => {
-                result += "\\rb";
+            '=' => {
+                result += "\\.\\e\\.";
             }
             '!' => {
-                result += "\\x";
+                result += "\\.\\x\\.";
             }
+            '(' => {
+                result += "\\.\\lp\\.";
+            }
+            ')' => {
+                result += "\\.\\rp\\.";
+            }
+            '[' => {
+                result += "\\.\\lb\\.";
+            }
+            ']' => {
+                result += "\\.\\rb\\.";
+            }
+            '\\' => {
+                result += "\\.\\\\\\.";
+            }
+
 
             some_char => {
                 result += &some_char.to_string();
