@@ -17,12 +17,12 @@ pub fn stdin() -> String {
 
     let line = input[..input.len() - 1].to_string();
 
-    let mut result = "".to_string();
+    let mut result = "\\.".to_string();
 
     for c in line.chars() {
         match c {
             ' ' => {
-                result += " \\_ ";
+                result += "\\. \\_ \\.";
             }
 
             '=' => {
@@ -53,7 +53,7 @@ pub fn stdin() -> String {
             }
         }
     }
-    return result;
+    return result+"\\.";
 }
 
 #[allow(dead_code)]

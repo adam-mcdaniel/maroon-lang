@@ -201,6 +201,8 @@ impl Evaluator {
                 } else if n == "@print".to_string() {
                     print!(
                         "{}",
+                        // &(self
+                        //     .safe_pop())
                         &(self
                             .safe_pop()
                             .replace("\\rp", ")")
@@ -232,6 +234,8 @@ impl Evaluator {
                 } else if n == "@println".to_string() {
                     println!(
                         "{}",
+                        // &(self
+                        //     .safe_pop())
                         &(self
                             .safe_pop()
                             .replace("\\rp", ")")
