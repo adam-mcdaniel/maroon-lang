@@ -1,11 +1,9 @@
-PutStrln["hello!"]
+PutStrln["hello!()[] @input"]
 
 PutStr[">> "]
 RESPONSE = Input[_]
-Putln[RESPONSE]
-Putln["hello!()[]"]
 PutStrln[
-	If[Eq[RESPONSE]["hello!()[]"]]
+	If[Eq[RESPONSE]["hello!()[] @input"]]
 		[":)"]
 		[":("]
 ]

@@ -11,3 +11,10 @@ Info["hey jude"]
 Debug["hey jude"]
 Warning["hey jude"]
 Error["hey jude"]
+
+Good = True
+Bad  = False
+
+Plus = A.B.(
+    Pair[A][Good]
+)

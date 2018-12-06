@@ -46,6 +46,9 @@ pub fn stdin() -> String {
             '\\' => {
                 result += "\\.\\\\\\.";
             }
+            '@' => {
+                result += "\\.@\\.";
+            }
 
 
             some_char => {

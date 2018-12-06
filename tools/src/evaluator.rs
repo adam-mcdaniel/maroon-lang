@@ -213,6 +213,7 @@ impl Evaluator {
                             .replace("\\e", "=")
                             .replace("\\_", " ")
                             .replace("\\\\", "\\\\.")
+                            .replace("@", "\\.@")
                             .replace("\\.", ""))
                     );
                 } else if n == "@print*".to_string() {
@@ -229,6 +230,7 @@ impl Evaluator {
                             .replace("\\e", "=")
                             .replace("\\_", " ")
                             .replace("\\\\", "\\\\.")
+                            .replace("@", "\\.@")
                             .replace("\\.", "")
                     );
                 } else if n == "@println".to_string() {
@@ -246,6 +248,7 @@ impl Evaluator {
                             .replace("\\e", "=")
                             .replace("\\_", " ")
                             .replace("\\\\", "\\\\.")
+                            .replace("@", "\\.@")
                             .replace("\\.", ""))
                     );
                 } else if n == "@println*".to_string() {
@@ -262,6 +265,7 @@ impl Evaluator {
                             .replace("\\e", "=")
                             .replace("\\_", " ")
                             .replace("\\\\", "\\\\.")
+                            .replace("@", "\\.@")
                             .replace("\\.", "")
                     );
                 } else if n == "@print_pipe".to_string() {
@@ -278,6 +282,7 @@ impl Evaluator {
                             .replace("\\e", "=")
                             .replace("\\_", " ")
                             .replace("\\\\", "\\\\.")
+                            .replace("@", "\\.@")
                             .replace("\\.", "")
                     );
                     self.push(vec![popped]);
@@ -295,6 +300,7 @@ impl Evaluator {
                             .replace("\\e", "=")
                             .replace("\\_", " ")
                             .replace("\\\\", "\\\\.")
+                            .replace("@", "\\.@")
                             .replace("\\.", ""))
                     );
                     self.push(vec![popped]);
