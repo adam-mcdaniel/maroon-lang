@@ -55,7 +55,7 @@ impl Preprocessor {
         p.process("Break = Break_A.(@break)");
 
         p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][Succ_X&] ] )");
-        p.process("Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F&][Plus_X]] )");
+        p.process("Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F][Plus_X]] )");
 
         p.process("Pred = Pred_N.(Pred_N @pred)");
 
