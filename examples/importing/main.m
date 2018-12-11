@@ -1,20 +1,15 @@
-Import["strings"]
+Import["logging"]
+Import["fib"]
+Import["num"]
 
-// Import["logging"]
-// Import["fib"]
-// Import["num"]
+Info["test"]
+Debug["test"]
+Warning["test"]
+Error["test"]
 
-// Info["test"]
-// Debug["test"]
-// Warning["test"]
-// Error["test"]
-
-// // print_fib[Succ[Succ[Succ[Succ[Succ[1]]]]]]
+print_fib[Succ[Succ[Succ[Succ[Succ[1]]]]]]
 
 
-// // PrintNumln[Pred[Succ[1]]]
-// // Debug[]
-
-// Putln[
-//     NumToStr[Succ[Succ[1]]]
-// ]
+Debug[
+    NumToStr[Succ[Succ[1]]]
+]

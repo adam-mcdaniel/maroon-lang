@@ -9,6 +9,6 @@ PrintNumln = num_ln.(
 )
 
 
-// NumToStr = NumToStr_A.(
-//     (NumToStr_A[none.(".")]["."])
-// )
+NumToStr = NumToStr_A.(
+    (Pred[NumToStr_A][a.(Concat["."][a])]["."])
+)
