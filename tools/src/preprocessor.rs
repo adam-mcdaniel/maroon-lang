@@ -16,6 +16,7 @@ impl Preprocessor {
         };
 
         p.process("Import = Import_A.(Import_A @import)");
+        p.process("Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)");
         p.process("True = (True_A.(True_B.(True_A)))");
         p.process("False = (False_A.(False_B.(False_B)))");
         p.process("And = (And_P.And_Q.(And_P [And_Q] [And_P]))");

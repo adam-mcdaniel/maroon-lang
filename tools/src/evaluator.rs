@@ -173,6 +173,14 @@ impl Evaluator {
                     };
                     // println!("arg1: {}, arg2: {}, result: {}", arg1, arg2, result);
                     self.push(vec![result.to_string()]);
+                } else if n == "@concat".to_string() {
+                    let arg1 = &self.safe_pop();
+                    let arg2 = &self.safe_pop();
+
+                    self.push(
+                        vec!["none.(".to_string() + &(unfold(&call(arg1, "none")) + &unfold(&call(arg2, "none"))) + ")"]
+                    )
+
                 } else if n == "@rec".to_string() {
                     let function = &self.safe_pop();
                     let mut argument = self.safe_pop();

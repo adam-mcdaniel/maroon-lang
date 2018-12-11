@@ -1,12 +1,5 @@
-PrintNum = Num.(
-    PipeFn[
-        number.((number[PipeStr]["."]))
-    ][Num]
-)
+Import["num"]
 
-PrintNumln = num_ln.(
-    Newln[PrintNum[num_ln]]
-)
 
 fib = Fib_N.(Head[Fib_N[
         old_pair.(
@@ -22,3 +15,5 @@ print_fib = Print_Fib_N.(Head[Print_Fib_N[
         )
     ][Pair[1][0]]]
 )
+
+
