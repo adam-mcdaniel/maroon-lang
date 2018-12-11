@@ -7,9 +7,6 @@ Debug["test"]
 Warning["test"]
 Error["test"]
 
+
 map_fib[PrintNumln][Succ[Succ[Succ[Succ[Succ[1]]]]]]
 
-
-Info[
-    NumToStr[Succ[Succ[1]]]
-]
