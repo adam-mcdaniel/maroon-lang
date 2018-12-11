@@ -1,3 +1,17 @@
+pub fn remove_escape_codes(line: &str) -> String {
+    line.replace(" ","")
+        .replace("\\rp", ")")
+        .replace("\\lp", "(")
+        .replace("\\rb", "]")
+        .replace("\\lb", "[")
+        .replace("\\x", "!")
+        .replace("\\e", "=")
+        .replace("\\_", " ")
+        .replace("\\\\", "\\\\.")
+        .replace("@", "\\.@")
+        .replace("\\.", "")
+}
+
 
 pub fn remove_comments(line: &str) -> String {
     // returns an empty string if line is a comment

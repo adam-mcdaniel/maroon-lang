@@ -203,105 +203,47 @@ impl Evaluator {
                         "{}",
                         // &(self
                         //     .safe_pop())
-                        &(self
-                            .safe_pop()
-                            .replace("\\rp", ")")
-                            .replace("\\lp", "(")
-                            .replace("\\rb", "]")
-                            .replace("\\lb", "[")
-                            .replace("\\x", "!")
-                            .replace("\\e", "=")
-                            .replace("\\_", " ")
-                            .replace("\\\\", "\\\\.")
-                            .replace("@", "\\.@")
-                            .replace("\\.", ""))
+                        remove_escape_codes(&(self.safe_pop()))
                     );
                 } else if n == "@print*".to_string() {
                     print!(
                         "{}",
-                        self.data
-                            .clone()
-                            .join("")
-                            .replace("\\rp", ")")
-                            .replace("\\lp", "(")
-                            .replace("\\rb", "]")
-                            .replace("\\lb", "[")
-                            .replace("\\x", "!")
-                            .replace("\\e", "=")
-                            .replace("\\_", " ")
-                            .replace("\\\\", "\\\\.")
-                            .replace("@", "\\.@")
-                            .replace("\\.", "")
+                        remove_escape_codes(
+                            &self.data
+                                .clone()
+                                .join("")
+                                )
                     );
                 } else if n == "@println".to_string() {
                     println!(
                         "{}",
                         // &(self
                         //     .safe_pop())
-                        &(self
-                            .safe_pop()
-                            .replace("\\rp", ")")
-                            .replace("\\lp", "(")
-                            .replace("\\rb", "]")
-                            .replace("\\lb", "[")
-                            .replace("\\x", "!")
-                            .replace("\\e", "=")
-                            .replace("\\_", " ")
-                            .replace("\\\\", "\\\\.")
-                            .replace("@", "\\.@")
-                            .replace("\\.", ""))
+                        remove_escape_codes(&(self.safe_pop()))
                     );
                 } else if n == "@println*".to_string() {
                     println!(
                         "{}",
-                        self.data
-                            .clone()
-                            .join("")
-                            .replace("\\rp", ")")
-                            .replace("\\lp", "(")
-                            .replace("\\rb", "]")
-                            .replace("\\lb", "[")
-                            .replace("\\x", "!")
-                            .replace("\\e", "=")
-                            .replace("\\_", " ")
-                            .replace("\\\\", "\\\\.")
-                            .replace("@", "\\.@")
-                            .replace("\\.", "")
+                        remove_escape_codes(
+                            &self.data
+                                .clone()
+                                .join("")
+                                )
                     );
                 } else if n == "@print_pipe".to_string() {
                     let popped = self.safe_pop();
                     print!(
                         "{}",
-                        &popped
-                            .replace(" ", "")
-                            .replace("\\rp", ")")
-                            .replace("\\lp", "(")
-                            .replace("\\rb", "]")
-                            .replace("\\lb", "[")
-                            .replace("\\x", "!")
-                            .replace("\\e", "=")
-                            .replace("\\_", " ")
-                            .replace("\\\\", "\\\\.")
-                            .replace("@", "\\.@")
-                            .replace("\\.", "")
+                        remove_escape_codes(&popped)
                     );
                     self.push(vec![popped]);
                 } else if n == "@print_pipe*".to_string() {
                     let popped = self.safe_pop();
                     print!(
                         "{}",
-                        &(unfold(&call(&popped, "_"))
-                            .replace(" ", "")
-                            .replace("\\rp", ")")
-                            .replace("\\lp", "(")
-                            .replace("\\rb", "]")
-                            .replace("\\lb", "[")
-                            .replace("\\x", "!")
-                            .replace("\\e", "=")
-                            .replace("\\_", " ")
-                            .replace("\\\\", "\\\\.")
-                            .replace("@", "\\.@")
-                            .replace("\\.", ""))
+                        remove_escape_codes(
+                            &(unfold(&call(&popped, "_")))
+                            )
                     );
                     self.push(vec![popped]);
                 // } else if n == "@break".to_string() {

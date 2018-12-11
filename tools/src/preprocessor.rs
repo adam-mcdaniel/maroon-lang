@@ -1,6 +1,9 @@
 use evaluator::*;
+use std::path::Path;
 use std::collections::HashMap;
 use string_tools::*;
+use io_tools::*;
+use std::env;
 
 pub struct Preprocessor {
     context: HashMap<String, String>,
@@ -12,6 +15,7 @@ impl Preprocessor {
             context: HashMap::new(),
         };
 
+        p.process("Import = Import_A.(Import_A @import)");
         p.process("True = (True_A.(True_B.(True_A)))");
         p.process("False = (False_A.(False_B.(False_B)))");
         p.process("And = (And_P.And_Q.(And_P [And_Q] [And_P]))");
@@ -30,6 +34,7 @@ impl Preprocessor {
         p.process("Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])");
 
         p.process("ToStr = ToStrA.( none.(ToStrA) )");
+        p.process("ToVal = ToValA.( ToValA[none] )");
 
         p.process("Newln = NewlnA.(\\_ @println NewlnA)");
         p.process("Pipe = PipeA.(PipeA @print_pipe)");
@@ -50,7 +55,7 @@ impl Preprocessor {
         p.process("Break = Break_A.(@break)");
 
         p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][Succ_X&] ] )");
-        p.process("Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F][Plus_X]] )");
+        p.process("Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F&][Plus_X]] )");
 
         p.process("Pred = Pred_N.(Pred_N @pred)");
 
@@ -240,19 +245,46 @@ impl Preprocessor {
                     None => "",
                 };
                 replaced_line = call(&(key.to_owned() + ".(" + &replaced_line + ")"), replacement);
-                // replaced_line = unfold(&replaced_line);
             }
 
-            // println!("{:?}", line_vec);
             return replaced_line.to_string();
+        }
+    }
+
+    pub fn import(&mut self, line: &str) {
+        let args: Vec<String> = env::args().collect();
+
+        if line.contains(&"@import".to_string()) {
+            let evaluated_expr = Evaluator::new(
+                                                line,
+                                                line,
+                                                ).eval();
+            if evaluated_expr.len() == 2 && evaluated_expr[1] == "@import" {
+
+                let name_in_stack = Evaluator::new(
+                                        &self.process(
+                                            &("ToVal[".to_owned() + &evaluated_expr[0] + "]")
+                                            ),
+                                        line,
+                                        ).eval();
+
+                let name = remove_escape_codes(&name_in_stack.join(""));
+
+                for line in Preprocessor::get_expressions(readlines(&(Path::new(&args[1]).parent().unwrap().to_str().unwrap().to_owned() + "/" + &name + ".m"))) {
+                    Evaluator::new(&self.process(&line), &line).eval();
+                }
+            }
         }
     }
 
     pub fn process(&mut self, line: &str) -> String {
         let line = &self.replace_strings(line);
+
         let calls_checked = &self.to_primitive_call(line);
 
         let bounded = self.bind(calls_checked);
+        self.import(&bounded);
+
         // println!("{} -> {}", line, bounded);
         return bounded;
     }
