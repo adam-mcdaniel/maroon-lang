@@ -1,5 +1,5 @@
 Log = Log_A.Log_B.(
-    PipeFn[a.(PipeStrln[Log_B])][PipeStr[Log_A]]
+    PipeFn[c.(PipeFn[a.(PipeStrln[Log_B])][PipeStr[Log_A]])][Log_B]
 )
 
 Info = Info_A.(Log["=( INFO )====> "][Info_A])

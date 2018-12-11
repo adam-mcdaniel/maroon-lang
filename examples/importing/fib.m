@@ -9,9 +9,9 @@ fib = Fib_N.(Head[Fib_N[
 )
 
 
-print_fib = Print_Fib_N.(Head[Print_Fib_N[
+map_fib = Map_Fib_F.Map_Fib_N.(Head[Map_Fib_N[
         old_pair.(
-            Pair[Add[PrintNumln[Head[old_pair]]][Tail[old_pair]]][Head[old_pair]]
+            Pair[Add[Map_Fib_F[Head[old_pair]]][Tail[old_pair]]][Head[old_pair]]
         )
     ][Pair[1][0]]]
 )
