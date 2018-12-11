@@ -30,10 +30,6 @@ impl Preprocessor {
         p.process("Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])");
 
         p.process("ToStr = ToStrA.( none.(ToStrA) )");
-        p.process("Put = PutA.(PutA @print)");
-        p.process("Putln = PutLnA.(PutLnA @println)");
-        p.process("PutStr = PutStrA.(PutStrA[none] @print*)");
-        p.process("PutStrln = PutStrLnA.(PutStrLnA[none] @println*)");
 
         p.process("Newln = NewlnA.(\\_ @println NewlnA)");
         p.process("Pipe = PipeA.(PipeA @print_pipe)");
@@ -41,6 +37,12 @@ impl Preprocessor {
         p.process("PipeStr = PipeStrA.(PipeStrA @print_pipe*)");
         p.process("PipeStrln = PipeStrlnA.(PipeStrlnA @print_pipe* \\_ @println)");
         p.process("Input = InputA.(ToStr[@input])");
+
+        p.process("Put = Pipe");
+        p.process("Putln = Pipeln");
+        p.process("PutStr = PipeStr");
+        p.process("PutStrln = PipeStrln");
+
 
         p.process("PipeFn = Pipe_function.Pipe_x.(v.()[Pipe_function[Pipe_x]] Pipe_x)");
 
