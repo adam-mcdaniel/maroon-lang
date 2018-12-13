@@ -9,4 +9,3 @@ Error["test"]
 
 
 map_fib[PrintNumln][Succ[Succ[Succ[Succ[Succ[1]]]]]]
-
