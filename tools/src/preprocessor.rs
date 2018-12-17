@@ -23,7 +23,7 @@ impl Preprocessor {
         p.process("Or = (Or_P.Or_Q.(Or_P [Or_P] [Or_Q]))");
         p.process("Not = (Not_P.(Not_P[False][True]))");
         p.process("Nand = Nand_A.Nand_B.(Not[And[Nand_A][Nand_B]])");
-        p.process("If = If_P.(If_A.(If_B.(If_P[If_A][If_B])))");
+        p.process("If = If_P.(If_A.(If_B.(If_P&[If_A&][If_B&])))");
         p.process("Eq = Eq_A.Eq_B.(Eq_A Eq_B @eq)");
         p.process("Eq = Eq_A.Eq_B.(If [Eq[Eq_A][Eq_B]] [True][False])");
         p.process("NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A][NotEq_B]])");
