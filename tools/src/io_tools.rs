@@ -73,6 +73,9 @@ pub fn readlines(file_name: &str) -> Vec<String> {
     let file = match File::open(file_name) {
         Ok(f) => BufReader::new(f),
         Err(_) => {
+            // error(
+            //     format!("Could not open file: {}", e.to_string())
+            //     );
             error("Could not open file.");
             process::exit(0);
         }

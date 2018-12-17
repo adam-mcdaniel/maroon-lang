@@ -19,13 +19,15 @@ impl Preprocessor {
         p.process("Concat = Concat_A.Concat_B.(Concat_B& Concat_A& @concat)");
         p.process("True = (True_A.(True_B.(True_A&)))");
         p.process("False = (False_A.(False_B.(False_B&)))");
-        p.process("And = (And_P.And_Q.(And_P& [And_Q&] [And_P&]))");
-        p.process("Or = (Or_P.Or_Q.(Or_P& [Or_P&] [Or_Q&]))");
+        p.process("And = (And_P.And_Q.(And_P& [And_Q&] [And_P]))");
+        p.process("Or = (Or_P.Or_Q.(Or_P& [Or_P] [Or_Q&]))");
         p.process("Not = (Not_P.(Not_P&[False][True]))");
         p.process("Nand = Nand_A.Nand_B.(Not[And[Nand_A&][Nand_B&]])");
         p.process("If = If_P.(If_A.(If_B.(If_P&[If_A&][If_B&])))");
         p.process("Eq = Eq_A.Eq_B.(Eq_A& Eq_B& @eq)");
-        p.process("Eq = Eq_A.Eq_B.(If [Eq[Eq_A&][Eq_B&]] [True][False])");
+        p.process("Eq = Eq_A.Eq_B.(C.A.B.(C&[A&][B&]) [Eq[Eq_A&][Eq_B&]] [True][False])");
+
+
         p.process("NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A&][NotEq_B&]])");
         p.process("Xor = Xor_A.(Xor_B.(And[Or[Xor_A&][Xor_B&]][Not[Eq[Xor_A&][Xor_B&]]]))");
 
@@ -62,6 +64,8 @@ impl Preprocessor {
 
         p.process("0 = False");
         p.process("1 = Succ[0]");
+
+        p.process("If = ReformIf_P.(ReformIf_A.(ReformIf_B.(ReformIf_P&[ReformIf_A&][ReformIf_B&])))");
 
         return p;
     }
