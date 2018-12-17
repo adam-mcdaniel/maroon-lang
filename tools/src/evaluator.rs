@@ -15,8 +15,8 @@ impl Evaluator {
         Self {
             preserved_program: actual_line.to_string(),
             data: split(program),
-            //logging: false,
-            logging: true,
+            logging: false,
+            // logging: true,
         }
     }
 
