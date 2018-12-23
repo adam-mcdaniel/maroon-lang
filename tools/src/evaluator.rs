@@ -96,6 +96,7 @@ impl Evaluator {
         for s in &self.data {
             if [
                 "!".to_string(),
+                "@exit".to_string(),
                 "@rec".to_string(),
                 "@eval".to_string(),
                 "@input".to_string(),
@@ -139,6 +140,8 @@ impl Evaluator {
                     self.push_front(split(&call(function, argument)));
                 } else if n == "@input".to_string() {
                     self.push(vec![stdin()]);
+                } else if n == "@exit".to_string() {
+                    process::exit(0);
                 } else if n == "@pred".to_string() {
                     let function = &self.safe_pop();
 

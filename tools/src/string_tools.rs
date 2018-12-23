@@ -53,20 +53,6 @@ pub fn call(function: &str, arg: &str) -> String {
     let parameter_name = &function[..find(&function, ".")];
     let mut result = (&function[find(&function, ".")+1..]).to_string();
 
-
-    // println!("before = {}", result);
-    // let scopes = result
-    //     .matches(".")
-    //     .count() - 1 - (result
-    //     .matches(".(")
-    //     .count() - 1);
-
-    // result = insert(&result, "(", find(&result, ".")+1);
-    // result += ")";
-
-    // println!("after  = {}", result);
-
-
     let mut token = "".to_string();
     let mut n: i32 = 0;
     
@@ -173,23 +159,6 @@ pub fn unfold(s: &str) -> String {
     return result;
 }
 
-// class Grouper:
-//     def unfold(self, s):
-//         # remove parentheses from a substring
-//         if "(" in s:
-//             pars = 1
-//             for i, char in enumerate(s[s.find("(", 1)+1:]):
-//                 # print(char, pars)
-//                 if char == "(": pars += 1
-//                 elif char == ")": pars -= 1
-                
-//                 if pars == 0: break
-                    
-
-//             s = remove(s, i + s.find("(", 1)+1)
-//             s = remove(s, s.find("(", 1))
-
-//         return s
 
 pub fn between_pars(s: &str, i: usize) -> bool {
     let mut in_pars = true;
@@ -220,32 +189,7 @@ pub fn between_pars(s: &str, i: usize) -> bool {
     }
     return false;
 }
-//     def between_pars(self, s, i):
 
-//         in_pars = True
-//         begin = 0
-
-//         pars = 0
-//         for j, char in enumerate(s):
-//             # print(char, pars)
-
-//             if char == "(":
-//                 if pars == 0:
-//                     begin = j
-//                 pars += 1
-
-//             elif char == ")": pars -= 1
-            
-//             if pars > 0:
-//                 in_pars = True
-
-//             if pars == 0:
-//                 if begin < i and i < j and in_pars:
-//                     return True
-
-//                 in_pars = False
-
-//         return False
 
 #[allow(unused_assignments)]
 pub fn split(s: &str) -> Vec<String> {
@@ -302,51 +246,3 @@ pub fn split(s: &str) -> Vec<String> {
             .collect()
     }
 }
-
-//     def split(self, s):
-//         head = ""
-//         tail = ""
-
-//         for i, char in enumerate(s):
-//             if i == len(s)-1:
-//                 head = s
-//                 break
-
-//             elif char == " " and not self.between_pars(s, i):
-//                 head = s[:i]
-//                 tail = s[i+1:]
-//                 break
-
-//             elif char == "(" and i == 0:
-
-//                 pars = 0
-//                 for j, par_test in enumerate(s):
-//                     if par_test == "(": pars += 1
-//                     elif par_test == ")": pars -= 1
-                    
-//                     if pars == 0: break
-                
-//                 head = s[:j+1]
-//                 tail = s[j+1:]
-
-//                 head = self.split(self.unfold(" " + head + " ").strip())
-                
-//                 if len(head) == 1:
-//                     head = ' '.join(head)
-
-//                 break
-
-
-
-//         if tail == "":
-//             if not type(head) == list:
-//                 return [head]
-//             return head
-
-//         if head == "":
-//             return self.split(tail)
-        
-//         if not type(head) == list:
-//             return [head] + self.split(tail)
-//         return head + self.split(tail)
-

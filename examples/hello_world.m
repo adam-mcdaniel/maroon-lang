@@ -1,2 +1,2 @@
 PutStrln["Hello world!"]
-PutStrln["none"]
+// PutStrln["none"]
