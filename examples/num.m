@@ -28,3 +28,27 @@ PrintNumln[
 PrintNumln[
     Mul[3][4]
 ]
+
+PrintNumln[
+    Mul[3][Mul[2][2]]
+]
+
+
+
+PrintNumln[
+    Add[3][4]
+]
+
+PrintNumln[
+    Add[3][Add[2][2]]
+]
+
+
+
+PrintNumln[
+    Sub[10][4]
+]
+
+PrintNumln[
+    Sub[10][Sub[6][2]]
+]

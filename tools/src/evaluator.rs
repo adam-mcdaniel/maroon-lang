@@ -45,46 +45,15 @@ impl Evaluator {
         return result;
     }
 
-    // pub fn pop_front(&mut self) -> Option<String> {
-    //     let result: Option<String>;
-
-    //     if self.data.len() > 0 {
-    //         result = Some(self.data[0].clone());
-    //         self.data = self.data[1..].to_vec();
-    //     } else {
-    //         result = None;
-    //     }
-
-    //     return result;
-    // }
 
     pub fn push(&mut self, n: Vec<String>) {
-        // let mut data = n;
         if n.len() > 0 {
-            // let data: Vec<String> = n
-            //     .into_iter()
-            //     .map(
-            //         |x|
-            //             x.replace("\\_", " ")
-            //     )
-            //     .collect();
-
             self.data.extend(n);
         }
     }
 
     pub fn push_front(&mut self, n: Vec<String>) {
         if n.len() > 0 {
-            // self.data.extend(n);
-
-            // let n: Vec<String> = n
-            //     .into_iter()
-            //     .map(
-            //         |x|
-            //             x.replace("\\_", " ")
-            //     )
-            //     .collect();
-
             let mut val = n.clone();
             val.append(&mut self.data);
             self.data = val;
@@ -147,20 +116,16 @@ impl Evaluator {
 
                     let my_line = self.preserved_program.clone();
 
-                    // println!("ToInt_N.(ToInt_N |.|.| ! | ! | !) ({}) !", function);
-
                     let num = function
                         .matches("Succ_X.")
                         .count() - 1;
                     
-                    // self.push(vec!["Succ ".repeat(num) + "0" + &" ! ".repeat(num)]);
                     let mut preprocessor = Preprocessor::new();
 
                     let data = 
                         Evaluator::new(&preprocessor.process(&(" Succ ".repeat(num)
                             + " 0 " + &" ! ".repeat(num))), &my_line)
                             .eval();
-                    // println!("pred: {:?}", data);
                     self.push(
                         data
                         );
@@ -174,7 +139,6 @@ impl Evaluator {
                         true => "a.b.a",
                         false => "a.b.b",
                     };
-                    // println!("arg1: {}, arg2: {}, result: {}", arg1, arg2, result);
                     self.push(vec![result.to_string()]);
                 } else if n == "@concat".to_string() {
                     let arg1 = &self.safe_pop();
@@ -188,10 +152,6 @@ impl Evaluator {
                     let function = &self.safe_pop();
                     let mut argument = self.safe_pop();
                     loop {
-                        // info(format!(" function: {}", function));
-                        // info(format!(" argument: {}", argument));
-                        // break;
-                        // self.push_front(split(&call(function, argument)));
                         let my_line = self.preserved_program.clone();
                         argument =
                             Evaluator::new(&format!("({}) ({}) !", function, argument), &my_line)
@@ -212,8 +172,6 @@ impl Evaluator {
                 } else if n == "@print".to_string() {
                     print!(
                         "{}",
-                        // &(self
-                        //     .safe_pop())
                         remove_escape_codes(&(self.safe_pop()))
                     );
                 } else if n == "@print*".to_string() {
@@ -228,8 +186,6 @@ impl Evaluator {
                 } else if n == "@println".to_string() {
                     println!(
                         "{}",
-                        // &(self
-                        //     .safe_pop())
                         remove_escape_codes(&(self.safe_pop()))
                     );
                 } else if n == "@println*".to_string() {
@@ -257,7 +213,6 @@ impl Evaluator {
                             )
                     );
                     self.push(vec![popped]);
-                // } else if n == "@break".to_string() {
                 } else {
                     self.push(split(&n));
                 }

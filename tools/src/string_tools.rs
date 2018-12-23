@@ -1,3 +1,6 @@
+#[allow(unused_imports)]
+use logging::*;
+
 pub fn remove_escape_codes(line: &str) -> String {
     line.replace(" ","")
         .replace("\\rp", ")")
@@ -49,7 +52,7 @@ pub fn find(string: &str, substring: &str) -> usize {
 // takes a lambda function as a string
 // replaces all instances of the parameter with the applied argument
 pub fn call(function: &str, arg: &str) -> String {
-
+    // debug(format!("CALL: {}[{}]", function, arg));
     let parameter_name = &function[..find(&function, ".")];
     let mut result = (&function[find(&function, ".")+1..]).to_string();
 
