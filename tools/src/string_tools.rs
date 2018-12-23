@@ -53,10 +53,24 @@ pub fn call(function: &str, arg: &str) -> String {
     let parameter_name = &function[..find(&function, ".")];
     let mut result = (&function[find(&function, ".")+1..]).to_string();
 
+
+    // println!("before = {}", result);
+    // let scopes = result
+    //     .matches(".")
+    //     .count() - 1 - (result
+    //     .matches(".(")
+    //     .count() - 1);
+
+    // result = insert(&result, "(", find(&result, ".")+1);
+    // result += ")";
+
+    // println!("after  = {}", result);
+
+
     let mut token = "".to_string();
     let mut n: i32 = 0;
     
-
+    let mut reached_space = false;
     let mut new_scope = false;
     let mut parentheses = 0;
 
@@ -80,13 +94,17 @@ pub fn call(function: &str, arg: &str) -> String {
                     parentheses += 1;
                 } else if c == ')' {
                     parentheses -= 1;
+                } else if c == ' ' {
+                    reached_space = true;
                 }
 
-                if parentheses < 1 {
+                if parentheses < 1 && reached_space {
+                    reached_space = false;
                     new_scope = false;
                     parentheses = 0;
+                } else {
+                    continue;
                 }
-                continue;
             }
 
             if !([' ', '(', ')', '.'].contains(&c)) {
@@ -100,7 +118,8 @@ pub fn call(function: &str, arg: &str) -> String {
                     n += ((arg.len()-1) as i32 - (token.len() as i32))+ 1;
                 } else if token == parameter_name.to_string() && c == '.' {
                     new_scope = true;
-                    parentheses = 1;
+                    reached_space = false;
+                    parentheses = 0;
                 } else if token == parameter_name.to_string() + "&" && !first_mutable {
                     first_mutable = true;
                     result = remove(&result, n as usize - 2 as usize);
