@@ -6,16 +6,18 @@ PutStrln[
     Tail[Tail[l1]]
 ]
 
-PrintNum = Num.(
+PutNum = Num.(
     PipeFn[
         number.((number[PipeStr]["."]))
     ][Num]
 )
 
+PutNumln = Num.(
+    Newln[PutNum[Num]]
+)
 
 2 = Succ[1]
 3 = Succ[2]
 
 
-3[PipeStr]["."]
-PutStrln[""]
+PutNumln[3]

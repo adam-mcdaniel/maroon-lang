@@ -6,7 +6,7 @@ extern crate tools;
 use tools::evaluator::*;
 use tools::io_tools::*;
 use tools::logging::*;
-use tools::string_tools::*;
+// use tools::string_tools::*;
 use tools::preprocessor::*;
 
 fn main() {

@@ -3,6 +3,11 @@
 3 = Succ[2]
 4 = Succ[3]
 5 = Succ[4]
+6 = Succ[5]
+7 = Succ[6]
+8 = Succ[7]
+9 = Succ[8]
+10 = Succ[9]
 
 PrintNum = Num.(
     PipeFn[
@@ -13,3 +18,13 @@ PrintNum = Num.(
 PrintNumln = num_ln.(
     Newln[PrintNum[num_ln]]
 )
+
+
+
+PrintNumln[
+    Sub[3][1]
+]
+
+PrintNumln[
+    Mul[3][4]
+]

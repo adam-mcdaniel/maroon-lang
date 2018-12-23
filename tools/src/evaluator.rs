@@ -143,11 +143,11 @@ impl Evaluator {
                     let function = &self.safe_pop();
 
                     let my_line = self.preserved_program.clone();
-                    let num = Evaluator::new(&format!("ToInt_N.(ToInt_N |.|.| ! | ! | !) ({}) !", function), &my_line)
-                        .eval()
-                        .join("")
-                        .replace(".", "")
-                        .matches("|")
+
+                    // println!("ToInt_N.(ToInt_N |.|.| ! | ! | !) ({}) !", function);
+
+                    let num = function
+                        .matches("Succ_X.")
                         .count() - 1;
                     
                     // self.push(vec!["Succ ".repeat(num) + "0" + &" ! ".repeat(num)]);

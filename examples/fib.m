@@ -7,6 +7,8 @@
 8 = Succ[7]
 9 = Succ[8]
 10 = Succ[9]
+11 = Succ[10]
+12 = Succ[11]
 
 PrintNum = Num.(
     PipeFn[
@@ -26,4 +28,4 @@ fib = n.(Head[n[
 )
 
 
-fib[10]
+fib[12]
