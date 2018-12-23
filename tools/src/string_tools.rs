@@ -74,6 +74,7 @@ pub fn call(function: &str, arg: &str) -> String {
         for c in (result.to_owned() + " ").chars() {
             n += 1;
 
+
             if new_scope {
                 if c == '(' {
                     parentheses += 1;
@@ -99,7 +100,7 @@ pub fn call(function: &str, arg: &str) -> String {
                     n += ((arg.len()-1) as i32 - (token.len() as i32))+ 1;
                 } else if token == parameter_name.to_string() && c == '.' {
                     new_scope = true;
-                    parentheses = 0;
+                    parentheses = 1;
                 } else if token == parameter_name.to_string() + "&" && !first_mutable {
                     first_mutable = true;
                     result = remove(&result, n as usize - 2 as usize);
