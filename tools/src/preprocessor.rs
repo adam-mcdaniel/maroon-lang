@@ -57,6 +57,7 @@ impl Preprocessor {
         p.process("Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)");
         p.process("Break = Break_A.(@break)");
         p.process("Exit = Exit_A.(@exit)");
+        p.process("Eval = S.(S @eval)");
 
 
         // p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N[Succ_F][Succ_X] ] )");

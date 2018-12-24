@@ -253,8 +253,11 @@ impl Evaluator {
                 } else if n == "@eval".to_string() {
                     let mut preprocessor = Preprocessor::new();
                     let arg = &self.safe_pop();
+                    let my_line = self.preserved_program.clone();
+
+                    // println!("{} none !", preprocessor.process(&Preprocessor::get_expressions(vec![remove_escape_codes(&arg)]).join(" ")));
                     self.push(vec![
-                        Evaluator::new(&mut preprocessor.process(arg), arg)
+                        Evaluator::new(&format!("{} none !", preprocessor.process(&Preprocessor::get_expressions(vec![remove_escape_codes(&arg)]).join(" "))), &my_line)
                             .eval()
                             .join(""),
                     ]);
