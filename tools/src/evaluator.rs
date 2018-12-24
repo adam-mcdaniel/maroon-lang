@@ -3,6 +3,7 @@ use logging::*;
 use preprocessor::*;
 use std::process;
 use string_tools::*;
+use std::cmp;
 
 pub struct Evaluator {
     preserved_program: String,
@@ -112,25 +113,137 @@ impl Evaluator {
                 } else if n == "@exit".to_string() {
                     process::exit(0);
                 } else if n == "@pred".to_string() {
-                    let function = &self.safe_pop();
+                    let num_a = &self.safe_pop();
 
                     let my_line = self.preserved_program.clone();
 
-                    let num = function
-                        .matches("Succ_X.")
-                        .count() - 1;
-                    
-                    let mut preprocessor = Preprocessor::new();
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
 
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() - 1, 0);
+                    
                     let data = 
-                        Evaluator::new(&preprocessor.process(&(" Succ ".repeat(num)
-                            + " 0 " + &" ! ".repeat(num))), &my_line)
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
                             .eval();
                     self.push(
                         data
                         );
+                } else if n == "@succ".to_string() {
+                    let num_a = &self.safe_pop();
 
+                    let my_line = self.preserved_program.clone();
 
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() + 1, 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
+                } else if n == "@add".to_string() {
+                    let num_a = &self.safe_pop();
+                    let num_b = &self.safe_pop();
+
+                    let my_line = self.preserved_program.clone();
+
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() + num_b
+                            .matches("!")
+                            .count(), 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
+                } else if n == "@sub".to_string() {
+                    let num_a = &self.safe_pop();
+                    let num_b = &self.safe_pop();
+
+                    let my_line = self.preserved_program.clone();
+
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() - num_b
+                            .matches("!")
+                            .count(), 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
+                } else if n == "@mul".to_string() {
+                    let num_a = &self.safe_pop();
+                    let num_b = &self.safe_pop();
+
+                    let my_line = self.preserved_program.clone();
+
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() * num_b
+                            .matches("!")
+                            .count(), 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
+                } else if n == "@div".to_string() {
+                    let num_a = &self.safe_pop();
+                    let num_b = &self.safe_pop();
+
+                    let my_line = self.preserved_program.clone();
+
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() / num_b
+                            .matches("!")
+                            .count(), 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
                 } else if n == "@eq".to_string() {
                     let arg1 = &self.safe_pop();
                     let arg2 = &self.safe_pop();

@@ -1,4 +1,3 @@
-// // // 2 = (f_.x_.(f_[f_[x_]]))
 2 = Succ[1]
 3 = Succ[2]
 4 = Succ[3]
@@ -19,8 +18,9 @@ PrintNumln = num_ln.(
     Newln[PrintNum[num_ln]]
 )
 
-
-
+PrintNumln[
+    Sub[3][1]
+    ]
 PrintNumln[
     Sub[3][1]
 ]
@@ -44,10 +44,6 @@ PrintNumln[
 ]
 
 
-
-PrintNumln[
-    Sub[10][4]
-]
 
 PrintNumln[
     Sub[10][Sub[6][2]]

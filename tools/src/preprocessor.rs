@@ -59,18 +59,19 @@ impl Preprocessor {
         p.process("Exit = Exit_A.(@exit)");
 
 
-        p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N[Succ_F][Succ_X] ] )");
-        p.process("Pred = Pred_N.(Pred_N @pred)");
+        // p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N[Succ_F][Succ_X] ] )");
+        // p.process("Add = Plus_M.(Plus_N.(Plus_F.(Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F][Plus_X]] ))))");
+        
+        p.process("Succ = N.(N @succ)");
+        p.process("Pred = N.(N @pred)");
+        p.process("Add = M.N.(N M @add)");
+        p.process("Sub = M.N.(N M @sub)");
+        p.process("Mul = M.N.(N M @mul)");
+        p.process("Div = M.N.(N M @div)");
 
-        p.process("Add = Plus_M.(Plus_N.(Plus_F.(Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F][Plus_X]] ))))");
-        p.process("Mul = M.N.F.X.(M[N[F]][X])");
-        p.process("Sub = M.N.(N[Pred][M])");
 
-
-        p.process("0 = False");
+        p.process("0 = F.X.(X)");
         p.process("1 = Succ[0]");
-
-        // p.process("If = ReformIf_P.(ReformIf_A.(ReformIf_B.(ReformIf_P&[ReformIf_A&][ReformIf_B&])))");
 
         return p;
     }
