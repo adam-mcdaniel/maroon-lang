@@ -68,6 +68,7 @@ impl Preprocessor {
         p.process("Sub = M.N.(N M @sub)");
         p.process("Mul = M.N.(N M @mul)");
         p.process("Div = M.N.(N M @div)");
+        p.process("Mod = M.N.(N M @mod)");
 
 
         p.process("0 = F.X.(X)");

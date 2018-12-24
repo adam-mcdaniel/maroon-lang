@@ -244,6 +244,29 @@ impl Evaluator {
                     self.push(
                         data
                         );
+                } else if n == "@mod".to_string() {
+                    let num_a = &self.safe_pop();
+                    let num_b = &self.safe_pop();
+
+                    let my_line = self.preserved_program.clone();
+
+                    // println!("num_a: {}", num_a);
+                    // println!("num_b: {}", num_b);
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count() % num_b
+                            .matches("!")
+                            .count(), 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
                 } else if n == "@eq".to_string() {
                     let arg1 = &self.safe_pop();
                     let arg2 = &self.safe_pop();
