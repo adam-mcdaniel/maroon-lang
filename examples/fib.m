@@ -28,12 +28,12 @@ PrintNumln = num_ln.(
 
 fib = n.(Head[n[
         old_pair.(
-            Pair[Add[Head[old_pair]][Tail[old_pair]]][Head[old_pair]]
+            Pair[Add[PrintNumln[Head[old_pair]]][Tail[old_pair]]][Head[old_pair]]
         )
     ][Pair[1][0]]]
 )
 
 
 PrintNumln[fib[
-    18
+    14
     ]]
