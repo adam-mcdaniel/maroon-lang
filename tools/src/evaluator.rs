@@ -115,93 +115,49 @@ impl Evaluator {
                     process::exit(0);
                 } else if n == "@to_fun".to_string() {
                     let num_a = &self.safe_pop();
-                    let my_line = self.preserved_program.clone();
-
 
                     let str_num = unfold(&call(&remove_escape_codes(num_a), "none"));
-                    // println!("num: {}", str_num);
                     let num = match str_num.parse::<i32>() {
                         Ok(n) => n,
                         Err(_) => 0
                     } as usize;
 
-                    // let num = cmp::max(num_a
-                    //     .matches("!")
-                    //     .count(), 0);
-                    
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@num".to_string() {
                     let num_a = &self.safe_pop();
 
-                    // let my_line = self.preserved_program.clone();
-
                     let num = cmp::max(num_a
                         .matches("!")
                         .count(), 0);
-                    
-                    // let data = 
-                    //     Evaluator::new(
-                    //         &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                    //         , &my_line)
-                    //         .eval();
+
                     self.push(
                         vec!["none.(\\.".to_owned() + &num.to_string()+"\\.)"]
                         );
                 } else if n == "@pred".to_string() {
                     let num_a = &self.safe_pop();
 
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
-
                     let num = cmp::max(num_a
                         .matches("!")
                         .count() - 1, 0);
                     
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@succ".to_string() {
                     let num_a = &self.safe_pop();
 
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
-
                     let num = cmp::max(num_a
                         .matches("!")
                         .count() + 1, 0);
-                    
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
+
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@add".to_string() {
                     let num_a = &self.safe_pop();
                     let num_b = &self.safe_pop();
-
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
 
                     let num = cmp::max(num_a
                         .matches("!")
@@ -209,22 +165,12 @@ impl Evaluator {
                             .matches("!")
                             .count(), 0);
                     
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@sub".to_string() {
                     let num_a = &self.safe_pop();
                     let num_b = &self.safe_pop();
-
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
 
                     let num = cmp::max(num_a
                         .matches("!")
@@ -232,22 +178,12 @@ impl Evaluator {
                             .matches("!")
                             .count(), 0);
                     
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@mul".to_string() {
                     let num_a = &self.safe_pop();
                     let num_b = &self.safe_pop();
-
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
 
                     let num = cmp::max(num_a
                         .matches("!")
@@ -255,22 +191,12 @@ impl Evaluator {
                             .matches("!")
                             .count(), 0);
                     
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@div".to_string() {
                     let num_a = &self.safe_pop();
                     let num_b = &self.safe_pop();
-
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
 
                     let num = cmp::max(num_a
                         .matches("!")
@@ -278,22 +204,12 @@ impl Evaluator {
                             .matches("!")
                             .count(), 0);
                     
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@mod".to_string() {
                     let num_a = &self.safe_pop();
                     let num_b = &self.safe_pop();
-
-                    let my_line = self.preserved_program.clone();
-
-                    // println!("num_a: {}", num_a);
-                    // println!("num_b: {}", num_b);
 
                     let num = cmp::max(num_a
                         .matches("!")
@@ -301,13 +217,8 @@ impl Evaluator {
                             .matches("!")
                             .count(), 0);
                     
-                    let data = 
-                        Evaluator::new(
-                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
-                            , &my_line)
-                            .eval();
                     self.push(
-                        data
+                        vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
                         );
                 } else if n == "@eq".to_string() {
                     let arg1 = &self.safe_pop();

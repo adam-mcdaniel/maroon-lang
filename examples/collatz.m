@@ -40,4 +40,4 @@ Collatz = N.(
 )
 
 
-Rec[Collatz][Mul[13][3]]
+Rec[Collatz][Mul[9][3]]
