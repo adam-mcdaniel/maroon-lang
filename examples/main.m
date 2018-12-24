@@ -1,3 +1,5 @@
+// Import["hmm"]
+
 PutStrln["hello!()[] @input"]
 
 PutStr[">> "]

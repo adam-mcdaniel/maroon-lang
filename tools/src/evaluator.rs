@@ -113,6 +113,30 @@ impl Evaluator {
                     self.push(vec![stdin()]);
                 } else if n == "@exit".to_string() {
                     process::exit(0);
+                } else if n == "@to_fun".to_string() {
+                    let num_a = &self.safe_pop();
+                    let my_line = self.preserved_program.clone();
+
+
+                    let str_num = unfold(&call(&remove_escape_codes(num_a), "none"));
+                    // println!("num: {}", str_num);
+                    let num = match str_num.parse::<i32>() {
+                        Ok(n) => n,
+                        Err(_) => 0
+                    } as usize;
+
+                    // let num = cmp::max(num_a
+                    //     .matches("!")
+                    //     .count(), 0);
+                    
+                    let data = 
+                        Evaluator::new(
+                            &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                            , &my_line)
+                            .eval();
+                    self.push(
+                        data
+                        );
                 } else if n == "@num".to_string() {
                     let num_a = &self.safe_pop();
 

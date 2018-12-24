@@ -73,10 +73,35 @@ pub fn readlines(file_name: &str) -> Vec<String> {
     let file = match File::open(file_name) {
         Ok(f) => BufReader::new(f),
         Err(_) => {
+            error("Could not open file.");
+            process::exit(0);
+        }
+    };
+    let lines: Vec<_> = file
+        .lines()
+        .map(|line| remove_comments(&line.unwrap()))
+        .collect();
+
+    return lines;
+}
+
+
+pub fn readstring(contents: &str) -> Vec<String> {
+    let lines: Vec<_> = contents
+        .lines()
+        .map(|line| remove_comments(&line))
+        .collect();
+    return lines;
+}
+
+pub fn import(file_name: &str, module_name: &str) -> Vec<String> {
+    let file = match File::open(file_name) {
+        Ok(f) => BufReader::new(f),
+        Err(_) => {
             // error(
             //     format!("Could not open file: {}", e.to_string())
             //     );
-            error("Could not open file.");
+            error(format!("Could not import \"{}\"", module_name));
             process::exit(0);
         }
     };

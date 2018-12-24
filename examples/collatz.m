@@ -13,13 +13,12 @@
 
 
 PrintNum = Num.(
-    PutStr[ToNum[N]]
+    PipeFn[pass.(PutStr[NumToStr[Num]])][Num]
 )
 
 PrintNumln = num_ln.(
     Newln[PrintNum[num_ln]]
 )
-
 
 
 Even = N.(

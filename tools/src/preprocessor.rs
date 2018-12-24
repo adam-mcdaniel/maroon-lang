@@ -70,7 +70,8 @@ impl Preprocessor {
         p.process("Div = M.N.(N M @div)");
         p.process("Mod = M.N.(N M @mod)");
         
-        p.process("ToNum = N.(N @num)");
+        p.process("StrToNum = N.(N @to_fun)");
+        p.process("NumToStr = N.(N @num)");
 
 
         p.process("0 = F.X.( X)");
@@ -284,7 +285,7 @@ impl Preprocessor {
 
                 let name = remove_escape_codes(&name_in_stack.join(""));
 
-                for line in Preprocessor::get_expressions(readlines(&(Path::new(&args[1]).parent().unwrap().to_str().unwrap().to_owned() + "/" + &name + ".m"))) {
+                for line in Preprocessor::get_expressions(import(&(Path::new(&args[1]).parent().unwrap().to_str().unwrap().to_owned() + "/" + &name + ".m"), &name)) {
                     Evaluator::new(&self.process(&line), &line).eval();
                 }
             }
