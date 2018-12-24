@@ -69,9 +69,11 @@ impl Preprocessor {
         p.process("Mul = M.N.(N M @mul)");
         p.process("Div = M.N.(N M @div)");
         p.process("Mod = M.N.(N M @mod)");
+        
+        p.process("ToNum = N.(N @num)");
 
 
-        p.process("0 = F.X.(X)");
+        p.process("0 = F.X.( X)");
         p.process("1 = Succ[0]");
 
         return p;

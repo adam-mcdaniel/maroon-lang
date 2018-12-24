@@ -76,6 +76,7 @@ impl Evaluator {
                 "@print_pipe*".to_string(),
                 "@println".to_string(),
                 "@println*".to_string(),
+                "@println_raw".to_string(),
             ]
                 .contains(s)
             {
@@ -112,6 +113,23 @@ impl Evaluator {
                     self.push(vec![stdin()]);
                 } else if n == "@exit".to_string() {
                     process::exit(0);
+                } else if n == "@num".to_string() {
+                    let num_a = &self.safe_pop();
+
+                    // let my_line = self.preserved_program.clone();
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count(), 0);
+                    
+                    // let data = 
+                    //     Evaluator::new(
+                    //         &("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")
+                    //         , &my_line)
+                    //         .eval();
+                    self.push(
+                        vec!["none.(\\.".to_owned() + &num.to_string()+"\\.)"]
+                        );
                 } else if n == "@pred".to_string() {
                     let num_a = &self.safe_pop();
 
@@ -323,6 +341,11 @@ impl Evaluator {
                     println!(
                         "{}",
                         remove_escape_codes(&(self.safe_pop()))
+                    );
+                } else if n == "@println_raw".to_string() {
+                    println!(
+                        "{}",
+                        &(self.safe_pop())
                     );
                 } else if n == "@println*".to_string() {
                     println!(
