@@ -22,10 +22,6 @@ PrintNumln = num_ln.(
 
 
 
-// PrintNumln[
-//     Mod[4][3]
-// ]
-
 Even = N.(
     Eq[Mod[N][2]][0]
 )
