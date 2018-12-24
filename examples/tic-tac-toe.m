@@ -157,5 +157,5 @@ Main = BoardAndPlayers.(
 
 
 Rec[Main][
-        Pair[PrintBoard[StartBoard]][Pair[A][B]]
-        ]
+    Pair[PrintBoard[StartBoard]][Pair[A][B]]
+    ]
