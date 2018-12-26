@@ -27,7 +27,7 @@ In addition, there are several flags used to interact with the interpreter, some
 
 The only supported mathmatical operations are Succ, Add, and Pred :(
 
-## Standard Library
+# Standard Library
 ---
 
 ### Import
@@ -179,7 +179,7 @@ NumToStr = N.(N @num)
 // You have to define the rest of the numbers yourself!
 ```
 
-## Install Rust and Compile Maroon
+# Install Rust and Compile Maroon
 ---
 
 It's super easy.
