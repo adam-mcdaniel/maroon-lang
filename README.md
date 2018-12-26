@@ -14,6 +14,11 @@ PutStrln["Test"]
 
 Parentheses are instead used for grouping things under one scope.
 
+### Defining a function
+
+The `=` operator is used to bind one side of the equals sign to the other. The left side becomes equal to the right side.
+
+
 ```fs
 If = C.A.B.(
     C[A][B] // im a comment
@@ -51,6 +56,8 @@ PutStrln[
 
 ## Standard Library
 ---
+
+These functions are predefined for you in the language, there's no need to define these yourself. Also, if you see something like this: `@something_here`, it's a flag to the interpreter. These are used to talk to the programming language itself. You don't need to use these flags because each of them have interfaces through which you can use them indirectly, such as the Add function.
 
 ### Import
 
