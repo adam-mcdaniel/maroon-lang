@@ -16,16 +16,6 @@ pub fn remove_escape_codes(line: &str) -> String {
 }
 
 
-pub fn remove_comments(line: &str) -> String {
-    // returns an empty string if line is a comment
-    if line.len() > 2 {
-        if &line[..2] == "//" {
-            return "".to_string();
-        }
-    }
-    return line.to_string();
-}
-
 // function used to insert one string into another string at a specific index.
 pub fn insert(string: &str, str_to_insert: &str, index: usize) -> String {
     let s = string[..index].to_owned() + str_to_insert + &string[index..];
@@ -39,6 +29,21 @@ pub fn remove(string: &str, index: usize) -> String {
     string[..index].to_owned() + &string[index+1..]
 }
 
+
+// remove whitespace
+pub fn remove_whitespace(string: &str) -> String {
+    // string[..index].to_owned() + &string[index+1..]
+    let mut s = "".to_string();
+
+    for c in string.chars() {
+        if c != ' ' && c != '\t' {
+            s.push(c);
+        }
+    }
+
+    return s;
+}
+
 // return the index of the first instance of a substring in a string
 pub fn find(string: &str, substring: &str) -> usize {
     let i = match (&string).find(substring) {
@@ -47,6 +52,26 @@ pub fn find(string: &str, substring: &str) -> usize {
     };
     return i;
 }
+
+
+pub fn remove_comments(line: &str) -> String {
+    // removes comments from string
+
+
+    // if line.len() > 2 {
+    //     if &line[..2] == "//" {
+    //         return "".to_string();
+    //     }
+    // }
+    // return line.to_string();
+    if line.contains("//") {
+        return line[..find(&line, "//")].to_string();
+    }
+
+    return line.to_string();
+}
+
+
 
 // returns a called function
 // takes a lambda function as a string

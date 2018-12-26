@@ -80,7 +80,7 @@ pub fn readlines(file_name: &str) -> Vec<String> {
     let lines: Vec<_> = file
         .lines()
         .map(|line| remove_comments(&line.unwrap()))
-        .filter(|line| line != "")
+        .filter(|line| remove_whitespace(line) != "")
         .collect();
 
     return lines;
@@ -91,7 +91,7 @@ pub fn readstring(contents: &str) -> Vec<String> {
     let lines: Vec<_> = contents
         .lines()
         .map(|line| remove_comments(&line))
-        .filter(|line| line != "")
+        .filter(|line| remove_whitespace(line) != "")
         .collect();
     return lines;
 }

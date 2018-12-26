@@ -20,7 +20,7 @@ fn main() {
     let mut preprocessor = Preprocessor::new();
     let script = readlines(&args[1]);
 
-    println!("{:?}", script);
+    // println!("{:?}", script);
 
     for line in Preprocessor::get_expressions(script) {
         Evaluator::new(&preprocessor.process(&line), &line).eval();

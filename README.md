@@ -2,32 +2,54 @@
 
 maroon is my attempt at a functional programming language. I wanted to become more familiar with the Lambda Calculus, so I made this! It's very simple to use.
 
-There are some rules though.
+## Syntax
+---
 
-A function takes and returns exactly one argument. Here's an example.
+### Calling a function
+Functions are called the same way as in other languages, but using square brackets `[]` instead of parentheses `()`. I used this to reduce the confusion between grouping and calling functions. Also, it's very aesthetically pleasing.
 
 ```fs
-Fun = a.(a)
-PutStrln[Fun["Test"]]
+PutStrln["Test"]
 ```
 
-The equals sign binds the left side of the statement to the right, the parentheses group the function body, the square brackets call a function with arguments.
+Parentheses are instead used for grouping things under one scope.
 
-## Some weird quirks
+```fs
+If = C.A.B.(
+    C[A][B] // im a comment
+)
 
-#### Stack
+PutStrln[
+    If[False]
+        ["a"]
+        ["b"]
+] // This will print "b"
+```
 
-maroon is a stack based language, and a weird one at that. There is no differentiation between data that's already been parsed and data that hasn't. Data that's been parsed is pushed to the back of the stack, and data to be parsed is popped off the front. When a function is called, it pops its argument off the back.
+A function takes and returns exactly one argument. However, you can curry functions, meaning that you can effectively take multiple arguments to a function by returning a function to take the second argument, or a third argument or so on.
 
-#### Flags
+```fs
+2 = Succ[1] // 2 is the successor to 1
+3 = Succ[2] // 3 is the successor to 2
+4 = Succ[3] // 4 is the successor to 3
 
-In addition, there are several flags used to interact with the interpreter, some are not useful in their current stage, though. Each of the useful flags has their own function to interface with it, so there is no real need for the users to touch them.
+Exp = M.N.(
+    Div[N[Mul[M]][M]][M]
+) // Returns M^N
 
-#### Math
+two_to_the_nth_power = Exp[2]
+// Returns N.(
+//     Div[N[Mul[2]][2]][2]
+// )
 
-The only supported mathmatical operations are Succ, Add, and Pred :(
+PutStrln[
+    NumToStr[two_to_the_nth_power[3]]
+    // Is Div[2[Mul[2]][2]][2]
+]
+```
 
-# Standard Library
+
+## Standard Library
 ---
 
 ### Import
@@ -179,7 +201,7 @@ NumToStr = N.(N @num)
 // You have to define the rest of the numbers yourself!
 ```
 
-# Install Rust and Compile Maroon
+## Install Rust and Compile Maroon
 ---
 
 It's super easy.
