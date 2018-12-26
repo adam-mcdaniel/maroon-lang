@@ -28,91 +28,159 @@ In addition, there are several flags used to interact with the interpreter, some
 The only supported mathmatical operations are Succ, Add, and Pred :(
 
 ## Standard Library
+---
+
+### Import
 
 ```fs
-// takes two arguments returns first
-True = (True_A.(True_B.(True_A)))
+Import = Import_A.(Import_A @import)
+```
 
-// takes two arguments returns second
-False = (False_A.(False_B.(False_B)))
+Import runs a script by name and imports all of its assignments.
+
+#### Example
+```fs
+Import["test"] // will import test.m
+```
 
 
-// logical and[a][b]
-And = (And_P.And_Q.(And_P [And_Q][And_P]))
-// logical or[a][b]
-Or = (Or_P.Or_Q.(Or_P [Or_P][Or_Q]))
-// logical not[a][b]
-Not = (Not_P.(Not_P[False][True]))
-// logical nand[a][b]
-Nand = Nand_A.Nand_B.(Not[And[Nand_A][Nand_B]])
+### Logic
 
-// if[condition][then_case][else_case]
-If = If_P.(If_A.(If_B.(If_P[If_A][If_B])))
+```fs
+True = A.B.(A)              // Takes two arguments, returns first
+False = A.B.(B)             // Takes two arguments, returns second
+And = P.Q.(P[Q][P])         // A AND B
+Or = P.Q.(P[P][Q])          // A OR B
+Not = P.(P[False][True])    // NOT A
+Nand = A.B.(Not[And[A][B]]) // A NAND B
+If = C.A.B.(C[A][B])        // Returns A if C is True. Else, return B.
 
-// Eq[a][b] returns a=b?
-Eq = Eq_A.Eq_B.(Eq_A Eq_B @eq)
-Eq = Eq_A.Eq_B.(If [Eq[Eq_A][Eq_B]][True][False])
-// NotEq[a][b] returns a=/=b?
-NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A][NotEq_B]])
-// logical xor[a][b]
-Xor = Xor_A.(Xor_B.(And[Or[Xor_A][xor_b]][Not[Eq[Xor_A][Xor_B]]]))
+Eq = A.B.(A B @eq)
+Eq = A.B.(C.A.B.(C[A][B]) [Eq[A][B]] [True][False])
+NotEq = A.B.(Not[Eq[A][B]])
+// Ignore the weird stuff, just know that Eq[A][B] is A == B
 
-// Pair[a][b] is a linked list
-Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z&[Pair_X][Pair_Y]))
-// Head[Pair[a][b]] returns a
-Head = First_P.(First_P[True])
-// Tail[Pair[a][b]] returns b
-Tail = Second_P.(Second_P[False])
-// Index[Pair[a][b]][0] returns a
-Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])
+Xor = A.(B.(And[Or[A][B]][Not[Eq[A][B]]])) // A XOR B
+```
 
-// ToStr[test] returns "test"
-ToStr = ToStrA.( none.(ToStrA) )
-// Put[test] prints test to screen
-Put = PutA.(PutA @print)
-// Putln[test] prints test\n to screen
-Putln = PutLnA.(PutLnA @println)
-// PutStr["test"] prints test to screen
-PutStr = PutStrA.(PutStrA[_] @print*)
-// PutStrln["test"] prints test\n to screen
-PutStrln = PutStrLnA.(PutStrLnA[_] @println*)
 
-// PipeFn[Function][Arg] calls Function with Arg just for its side-effects.
-// Returns Arg.
-PipeFn = Pipe_function.Pipe_x.(v.()[Pipe_function[Pipe_x]] Pipe_x)
+### IO
+```fs
+ToStr = A.( none.(A) )
+// Converts an Identifier to a string
+// For example, ToStr[Hello] returns "Hello"
 
-// Newln["test"] prints \n to screen and returns "test"
+ToVal = ToValA.( ToValA[none] )
+// Reverses ToStr
+
+
 Newln = NewlnA.(\\_ @println NewlnA)
-// Pipe[test] prints test to screen and returns test
+// Takes an argument, prints new line, returns argument
+
 Pipe = PipeA.(PipeA @print_pipe)
-// Pipeln[test] prints test\n to screen and returns test
+// Takes an argument, prints the argument, returns argument
+
 Pipeln = PipelnA.(PipelnA @print_pipe \\_ @println)
-// PipeStr["test"] prints test to screen and returns test
+// Takes an argument, prints the argument and a new line, returns argument
+
 PipeStr = PipeStrA.(PipeStrA @print_pipe*)
-// PipeStrln["test"] prints test\n to screen and returns test
+// Takes a String, prints the String, returns String
+
 PipeStrln = PipeStrlnA.(PipeStrlnA @print_pipe* \\_ @println)
-// Input["test"] returns user input
+// Takes a String, prints the String and a new line, returns String
+
 Input = InputA.(ToStr[@input])
+// Takes an argument and returns user input
 
-// Rec[f][x] returns f recursively applied to f[x]
+// Other names for pipe functions, more intuitive to user
+Put = Pipe
+Putln = Pipeln
+PutStr = PipeStr
+PutStrln = PipeStrln
+```
+
+### Strings
+```fs
+// Not much here yet, there will be more :)
+
+Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)
+// Concatenates two strings 
+```
+
+
+### Pairs (lists)
+
+```fs
+Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z[Pair_X][Pair_Y]))
+// Takes two arguments and returns a pair of the two
+
+Head = First_P.(First_P[True])
+// Takes a pair and returns the first object in the pair
+
+Tail = Second_P.(Second_P[False])
+// Takes a pair and returns the second object in the pair
+
+Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])
+// Takes a linked pair (a chain of pairs within pairs)
+// and returns the Nth recursion depth
+```
+
+
+### Kind of IO?
+
+```fs
+PipeFn = Pipe_function.Pipe_x.(v.()[Pipe_function[Pipe_x]] Pipe_x)
+// Takes a function and a value, and calls the function with the value
+// Then returns the original value.
+// Used purely to call the function for its side effects
+
+Exit = Exit_A.(@exit)
+// Exits program
+
+Eval = S.(S @eval)
+// Evaluates string
+
 Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)
-// Break["test"] breaks out of a Rec loop
+// Recursively calls function, like a church numeral infinity
+// (If you dont know what church numerals are, google them)
 Break = Break_A.(@break)
+// Takes an argument and breaks from Rec function
+```
 
-// Pred[n] returns n-1
-Pred = Pred_N.(Pred_N @pred)
+### Math
 
-// Succ[n] returns Add[n][1]
-Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N&[Succ_F&][Succ_X&] ] )
-// Add[m][n] returns m+n
-Add = Plus_M.Plus_N.Plus_F.Plus_X.( Plus_M[Plus_F]Plus_N[Plus_F][Plus_X]] )
-// 0 is False
-0 = False
-// 1 is f.x.(f[x])
+```fs
+Succ = N.(N @succ)
+// N + 1
+Pred = N.(N @pred)
+// N - 1
+Add = M.N.(N M @add)
+// M + N
+Sub = M.N.(N M @sub)
+// M - N
+Mul = M.N.(N M @mul)
+// M * N
+Div = M.N.(N M @div)
+// M / N
+Mod = M.N.(N M @mod)
+// M % N
+
+StrToNum = N.(N @to_fun)
+// Converts "1" to the church numeral for 1, or "99" to the church numeral for 99
+
+NumToStr = N.(N @num)
+// Converts the church numeral for 1 to "1", or the church numeral for 99 to "99"
+
+
+0 = F.X.( X)
+// Definition of Zero
 1 = Succ[0]
+// One comes after Zero
+// You have to define the rest of the numbers yourself!
 ```
 
 ## Install Rust and Compile Maroon
+---
 
 It's super easy.
 

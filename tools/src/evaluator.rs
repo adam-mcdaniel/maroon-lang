@@ -174,9 +174,9 @@ impl Evaluator {
 
                     let num = cmp::max(num_a
                         .matches("!")
-                        .count() - num_b
+                        .count() as i32 - num_b
                             .matches("!")
-                            .count(), 0);
+                            .count() as i32, 0) as usize;
                     
                     self.push(
                         vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
@@ -200,9 +200,9 @@ impl Evaluator {
 
                     let num = cmp::max(num_a
                         .matches("!")
-                        .count() / num_b
+                        .count() as i32 / num_b
                             .matches("!")
-                            .count(), 0);
+                            .count() as i32, 0) as usize;
                     
                     self.push(
                         vec![("F.X.(".to_owned() + &" F".repeat(num) + &" X" + &" !".repeat(num) + &")")]
