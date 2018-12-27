@@ -18,11 +18,13 @@ fn main() {
     }
 
     let mut preprocessor = Preprocessor::new();
+
     let script = readlines(&args[1]);
+    let processed_script = Preprocessor::get_expressions(script);
 
-    // println!("{:?}", script);
+    // println!("{:?}", processed_script);
 
-    for line in Preprocessor::get_expressions(script) {
+    for line in Preprocessor::get_expressions(processed_script) {
         Evaluator::new(&preprocessor.process(&line), &line).eval();
     }
 }

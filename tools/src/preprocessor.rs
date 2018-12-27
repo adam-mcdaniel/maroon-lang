@@ -1,9 +1,9 @@
 use evaluator::*;
-use std::path::Path;
-use std::collections::HashMap;
-use string_tools::*;
 use io_tools::*;
+use std::collections::HashMap;
 use std::env;
+use std::path::Path;
+use string_tools::*;
 
 pub struct Preprocessor {
     context: HashMap<String, String>,
@@ -27,14 +27,19 @@ impl Preprocessor {
         p.process("Eq = Eq_A.Eq_B.(Eq_A Eq_B @eq)");
         p.process("Eq = Eq_A.Eq_B.(C.A.B.(C[A][B]) [Eq[Eq_A][Eq_B]] [True][False])");
 
-
         p.process("NotEq = NotEq_A.NotEq_B.(Not[Eq[NotEq_A][NotEq_B]])");
         p.process("Xor = Xor_A.(Xor_B.(And[Or[Xor_A][Xor_B]][Not[Eq[Xor_A][Xor_B]]]))");
 
         p.process("Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z[Pair_X][Pair_Y]))");
-        p.process("Head = First_P.(First_P[True])");
-        p.process("Tail = Second_P.(Second_P[False])");
+        p.process("Cons = Pair");
+        p.process("Nil = False");
+        p.process("IsNil = L.(Eq[L[H.T.D.(False)][True]][True])");
+        p.process("First = First_P.(First_P[True])");
+        p.process("Second = Second_P.(Second_P[False])");
+        p.process("Head = First");
+        p.process("Tail = Second");
         p.process("Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])");
+        // p.process("Cons = H.T.(Pair[False][Pair[H][T]])");
 
         p.process("ToStr = ToStrA.( none.(ToStrA) )");
         p.process("ToVal = ToValA.( ToValA[none] )");
@@ -51,7 +56,6 @@ impl Preprocessor {
         p.process("PutStr = PipeStr");
         p.process("PutStrln = PipeStrln");
 
-
         p.process("PipeFn = Pipe_function.Pipe_x.(v.()[Pipe_function[Pipe_x]] Pipe_x)");
 
         p.process("Rec = Rec_Function.Rec_Argument.(Rec_Argument Rec_Function @rec)");
@@ -59,10 +63,9 @@ impl Preprocessor {
         p.process("Exit = Exit_A.(@exit)");
         p.process("Eval = S.(S @eval)");
 
-
         // p.process("Succ = Succ_N.Succ_F.Succ_X.( Succ_F[Succ_N[Succ_F][Succ_X] ] )");
         // p.process("Add = Plus_M.(Plus_N.(Plus_F.(Plus_X.( Plus_M[Plus_F][Plus_N[Plus_F][Plus_X]] ))))");
-        
+
         p.process("Succ = N.(N @succ)");
         p.process("Pred = N.(N @pred)");
         p.process("Add = M.N.(N M @add)");
@@ -70,10 +73,9 @@ impl Preprocessor {
         p.process("Mul = M.N.(N M @mul)");
         p.process("Div = M.N.(N M @div)");
         p.process("Mod = M.N.(N M @mod)");
-        
+
         p.process("StrToNum = N.(N @to_fun)");
         p.process("NumToStr = N.(N @num)");
-
 
         p.process("0 = F.X.( X)");
         p.process("1 = Succ[0]");
@@ -271,22 +273,27 @@ impl Preprocessor {
         let args: Vec<String> = env::args().collect();
 
         if line.contains(&"@import".to_string()) {
-            let evaluated_expr = Evaluator::new(
-                                                line,
-                                                line,
-                                                ).eval();
+            let evaluated_expr = Evaluator::new(line, line).eval();
             if evaluated_expr.len() == 2 && evaluated_expr[1] == "@import" {
-
                 let name_in_stack = Evaluator::new(
-                                        &self.process(
-                                            &("ToVal[".to_owned() + &evaluated_expr[0] + "]")
-                                            ),
-                                        line,
-                                        ).eval();
+                    &self.process(&("ToVal[".to_owned() + &evaluated_expr[0] + "]")),
+                    line,
+                ).eval();
 
                 let name = remove_escape_codes(&name_in_stack.join(""));
 
-                for line in Preprocessor::get_expressions(import(&(Path::new(&args[1]).parent().unwrap().to_str().unwrap().to_owned() + "/" + &name + ".m"), &name)) {
+                for line in Preprocessor::get_expressions(import(
+                    &(Path::new(&args[1])
+                        .parent()
+                        .unwrap()
+                        .to_str()
+                        .unwrap()
+                        .to_owned()
+                        + "/"
+                        + &name
+                        + ".m"),
+                    &name,
+                )) {
                     Evaluator::new(&self.process(&line), &line).eval();
                 }
             }

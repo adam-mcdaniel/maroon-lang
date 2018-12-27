@@ -3,9 +3,11 @@
 maroon is my attempt at a functional programming language. I wanted to become more familiar with the Lambda Calculus, so I made this! It's very simple to use.
 
 ## Syntax
+
 ---
 
 ### Calling a function
+
 Functions are called the same way as in other languages, but using square brackets `[]` instead of parentheses `()`. I used this to reduce the confusion between grouping and calling functions. Also, it's very aesthetically pleasing.
 
 ```fs
@@ -17,7 +19,6 @@ Parentheses are instead used for grouping things under one scope.
 ### Defining a function
 
 The `=` operator is used to bind one side of the equals sign to the other. The left side becomes equal to the right side.
-
 
 ```fs
 If = C.A.B.(
@@ -53,8 +54,8 @@ PutStrln[
 ]
 ```
 
-
 ## Standard Library
+
 ---
 
 These functions are predefined for you in the language, there's no need to define these yourself. Also, if you see something like this: `@something_here`, it's a flag to the interpreter. These are used to talk to the programming language itself. You don't need to use these flags because each of them have interfaces through which you can use them indirectly, such as the Add function.
@@ -68,10 +69,10 @@ Import = Import_A.(Import_A @import)
 Import runs a script by name and imports all of its assignments.
 
 #### Example
+
 ```fs
 Import["test"] // will import test.m
 ```
-
 
 ### Logic
 
@@ -92,8 +93,8 @@ NotEq = A.B.(Not[Eq[A][B]])
 Xor = A.(B.(And[Or[A][B]][Not[Eq[A][B]]])) // A XOR B
 ```
 
-
 ### IO
+
 ```fs
 ToStr = A.( none.(A) )
 // Converts an Identifier to a string
@@ -129,31 +130,38 @@ PutStrln = PipeStrln
 ```
 
 ### Strings
+
 ```fs
 // Not much here yet, there will be more :)
 
 Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)
-// Concatenates two strings 
+// Concatenates two strings
 ```
-
 
 ### Pairs (lists)
 
 ```fs
 Pair = Pair_X.Pair_Y.(Pair_Z.(Pair_Z[Pair_X][Pair_Y]))
 // Takes two arguments and returns a pair of the two
+Cons = Pair
 
-Head = First_P.(First_P[True])
+
+Nil = False
+// Nil is False
+IsNil = N.(Eq[N][False])
+
+Head = P.(P[True])
+First = Head
 // Takes a pair and returns the first object in the pair
 
-Tail = Second_P.(Second_P[False])
+Tail = P.(P[False])
+First = Second
 // Takes a pair and returns the second object in the pair
 
 Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])
 // Takes a linked pair (a chain of pairs within pairs)
 // and returns the Nth recursion depth
 ```
-
 
 ### Kind of IO?
 
@@ -209,6 +217,7 @@ NumToStr = N.(N @num)
 ```
 
 ## Install Rust and Compile Maroon
+
 ---
 
 It's super easy.
