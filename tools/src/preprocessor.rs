@@ -75,9 +75,11 @@ impl Preprocessor {
 
         p.process("StrToNum = N.(N @to_fun)");
         p.process("NumToStr = N.(N @num)");
+
         p.process("Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)");
         p.process("IndexStr = S.N.(S N @index_string)");
         p.process("RangeStr = S.A.B.(S B A @range_string)");
+        p.process("Replace = A.B.C.(C B A @replace_string)");
         p.process("In = A.B.(If[B A @in_string][True][False])");
 
         p.process("0 = F.X.( X)");

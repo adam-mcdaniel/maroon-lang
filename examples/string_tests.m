@@ -12,6 +12,13 @@ PutStrln[
 ]
 
 PutStrln[
+    Replace[
+        Replace["Test :Thing:"]
+            ["Thing"]["up"]
+    ]["Test"][":hmm:"]
+]
+
+PutStrln[
     If[In["Test"]["es"]]
         ["True"]
         ["False"]

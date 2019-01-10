@@ -168,6 +168,17 @@ impl Evaluator {
                         true => "a.b.a".to_string(),
                         false => "a.b.b".to_string()
                         }]);
+                } else if n == "@replace_string".to_string() {
+                    let string_a = &self.safe_pop();
+                    let string_b = &remove_escape_codes(&self.safe_pop());
+                    let string_c = &remove_escape_codes(&self.safe_pop());
+                    // println!("{} {} {}", string_a, string_b, string_c);
+                    self.push(vec![
+                        "none.(\\.".to_owned() + &get_inside_string(&string_a).replace(
+                            &get_inside_string(&remove_escape_codes(&string_b)),
+                            &get_inside_string(&remove_escape_codes(&string_c)),
+                        ) + "\\.)"
+                        ]);
                 } else if n == "@range_string".to_string() {
                     let num_a = &self.safe_pop();
                     let num_b = &self.safe_pop();

@@ -34,6 +34,11 @@ pub fn from_maroon_string(string: &str) -> String {
 }
 
 
+// remove none.() from string
+pub fn get_inside_string(string: &str) -> String {
+    return string[6..string.len()-1].to_string();
+}
+
 // function used to insert one string into another string at a specific index.
 pub fn insert(string: &str, str_to_insert: &str, index: usize) -> String {
     let s = string[..index].to_owned() + str_to_insert + &string[index..];
