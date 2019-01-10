@@ -17,6 +17,8 @@ fn main() {
         process::exit(0);
     }
 
+    // println!("test: {}", remove_escape_codes(&add_escape_codes("hello![]()=\\.world!")));
+
     let mut preprocessor = Preprocessor::new();
 
     let script = readlines(&args[1]);

@@ -132,10 +132,15 @@ PutStrln = PipeStrln
 ### Strings
 
 ```fs
-// Not much here yet, there will be more :)
-
 Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)
 // Concatenates two strings
+
+IndexStr = S.N.(S N @index_string)
+// Returns a character in a string S at index N
+RangeStr = S.A.B.(S B A @range_string)
+// Returns a substring from a string S starting index A with length B
+In = A.B.(If[B A @in_string][True][False])
+// Returns True if B is in A, otherwise False
 ```
 
 ### Pairs (lists)

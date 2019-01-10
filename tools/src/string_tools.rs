@@ -15,6 +15,24 @@ pub fn remove_escape_codes(line: &str) -> String {
         .replace("\\.", "")
 }
 
+pub fn add_escape_codes(line: &str) -> String {
+    line.replace("\\", "\\.\\\\\\.")
+        .replace(")", "\\.\\rp\\.")    
+        .replace("(", "\\.\\lp\\.")
+        .replace("]", "\\.\\rb\\.")
+        .replace("[", "\\.\\lb\\.")
+        .replace("!", "\\.\\x\\.")
+        .replace("=", "\\.\\e\\.")
+        .replace(" ", "\\. \\_ \\.")
+        .replace("@", "\\.@\\.")
+}
+
+
+pub fn from_maroon_string(string: &str) -> String {
+    let result = remove_escape_codes(&string[6..string.len()-1]);
+    return result;
+}
+
 
 // function used to insert one string into another string at a specific index.
 pub fn insert(string: &str, str_to_insert: &str, index: usize) -> String {

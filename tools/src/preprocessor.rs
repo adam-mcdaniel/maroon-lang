@@ -16,7 +16,6 @@ impl Preprocessor {
         };
 
         p.process("Import = Import_A.(Import_A @import)");
-        p.process("Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)");
         p.process("True = (True_A.(True_B.(True_A)))");
         p.process("False = (False_A.(False_B.(False_B)))");
         p.process("And = (And_P.And_Q.(And_P [And_Q] [And_P]))");
@@ -34,10 +33,10 @@ impl Preprocessor {
         p.process("Cons = Pair");
         p.process("Nil = False");
         p.process("IsNil = L.(Eq[L[H.T.D.(False)][True]][True])");
-        p.process("First = First_P.(First_P[True])");
-        p.process("Second = Second_P.(Second_P[False])");
-        p.process("Head = First");
-        p.process("Tail = Second");
+        p.process("Head = First_P.(First_P[True])");
+        p.process("Tail = Second_P.(Second_P[False])");
+        p.process("First = Head");
+        p.process("Second = Tail");
         p.process("Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])");
         // p.process("Cons = H.T.(Pair[False][Pair[H][T]])");
 
@@ -76,6 +75,10 @@ impl Preprocessor {
 
         p.process("StrToNum = N.(N @to_fun)");
         p.process("NumToStr = N.(N @num)");
+        p.process("Concat = Concat_A.Concat_B.(Concat_B Concat_A @concat)");
+        p.process("IndexStr = S.N.(S N @index_string)");
+        p.process("RangeStr = S.A.B.(S B A @range_string)");
+        p.process("In = A.B.(If[B A @in_string][True][False])");
 
         p.process("0 = F.X.( X)");
         p.process("1 = Succ[0]");

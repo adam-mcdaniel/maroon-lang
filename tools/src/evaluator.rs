@@ -91,13 +91,19 @@ impl Evaluator {
         match self.pop() {
             Some(n) => n,
             None => {
-                error(format!(
-                    "Attempted to call function with too few parameters,\nor call a function using an improper amount of braces: \n\n\"{}\"",
-                    self.preserved_program
-                ));
-                process::exit(1);
+                self.error("Attempted to call function with too few parameters,\nor call a function using an improper amount of braces")
             }
         }
+    }
+
+    pub fn error(&self, message: &str) -> String {
+        error(format!(
+            "{}: \n\n\"{}\"",
+            message,
+            self.preserved_program
+        ));
+        process::exit(1);
+        // return "".to_string()
     }
 
     pub fn step(&mut self) {
@@ -134,6 +140,50 @@ impl Evaluator {
 
                     self.push(
                         vec!["none.(\\.".to_owned() + &num.to_string()+"\\.)"]
+                        );
+                } else if n == "@index_string".to_string() {
+                    let num_a = &self.safe_pop();
+                    let string_a = &self.safe_pop();
+
+                    let num = cmp::max(num_a
+                        .matches("!")
+                        .count(), 0);
+
+                    let inserted_value = &(match &from_maroon_string(string_a).chars().nth(num) {
+                            Some(n) => n,
+                            None => {
+                                self.error("Index not in range");
+                                &' '
+                            }
+                        }).to_string();
+
+                    self.push(
+                        vec!["none.(\\.".to_owned() + inserted_value +"\\.)"]
+                        );
+                } else if n == "@in_string".to_string() {
+                    let string_a = &from_maroon_string(&self.safe_pop());
+                    let string_b = &from_maroon_string(&self.safe_pop());
+
+                    self.push(vec![match string_a.contains(string_b) {
+                        true => "a.b.a".to_string(),
+                        false => "a.b.b".to_string()
+                        }]);
+                } else if n == "@range_string".to_string() {
+                    let num_a = &self.safe_pop();
+                    let num_b = &self.safe_pop();
+                    let string_a = &self.safe_pop();
+
+                    let num_first = cmp::max(num_a
+                        .matches("!")
+                        .count(), 0);
+                    let num_last = cmp::max(num_b
+                        .matches("!")
+                        .count(), 0);
+                    if &from_maroon_string(string_a).len() < &num_last {
+                        self.error("Range out of bounds");
+                    }
+                    self.push(
+                        vec!["none.(\\.".to_owned() + &from_maroon_string(string_a)[num_first..num_last] + "\\.)"]
                         );
                 } else if n == "@pred".to_string() {
                     let num_a = &self.safe_pop();
