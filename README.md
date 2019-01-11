@@ -163,7 +163,7 @@ First = Head
 // Takes a pair and returns the first object in the pair
 
 Tail = P.(P[False])
-First = Second
+Second = Tail
 // Takes a pair and returns the second object in the pair
 
 Index = Index_P.Index_N.(Head[Index_N[Tail][Index_P]])
